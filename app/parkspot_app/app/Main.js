@@ -8,8 +8,8 @@ export default class Main extends React.Component {
       <MapView
         style={{flex: 1}}
         region={{
-          latitude: 42.882004,
-          longitude: 74.582748,
+          latitude: 51.034809,
+          longitude: 3.729268,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421
         }}
