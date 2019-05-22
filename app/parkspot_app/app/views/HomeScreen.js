@@ -1,6 +1,13 @@
-import React, { Component } from 'react'
-import { View, StyleSheet } from 'react-native'
-import { LinearGradient } from 'expo'
+import React, {
+    Component
+} from 'react'
+import {
+    View,
+    StyleSheet
+} from 'react-native'
+import {
+    LinearGradient
+} from 'expo'
 import Map from '../components/Map'
 import Searchbar from '../components/Searchbar'
 const styles = StyleSheet.create({
@@ -32,7 +39,8 @@ class HomeScreen extends Component {
     render() {
         return (
 
-            <Map />
+            <
+            Map / >
 
         );
     }
