@@ -1,9 +1,11 @@
-import { StyleSheet } from 'react-native'
-import { vw, vh } from 'react-native-expo-viewport-units';
+import {
+  StyleSheet
+} from 'react-native'
+
 
 const bars = StyleSheet.create({
   searchbar: {
-    width: vw(90),
+    width: 90,
     height: 30,
     alignSelf: "center",
     justifyContent: "space-around",
