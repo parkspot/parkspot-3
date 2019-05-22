@@ -9,8 +9,11 @@ const bars = StyleSheet.create({
     height: 30,
     alignSelf: "center",
     justifyContent: "space-around",
-    backgroundColor: 'white',
+    backgroundColor: 'blue',
     borderRadius: 50,
+    position: "absolute",
+
+
   },
 })
 
