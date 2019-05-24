@@ -2,27 +2,14 @@ import React from 'react';
 import {
     StyleSheet,
     View,
-    Text,
-    TouchableOpacity,
-    Dimensions,
-    TextInput,
 } from 'react-native';
 
-import MapView, {
-    Circle,
-    Polygon,
-    Polyline,
-    ProviderPropType,
-} from 'react-native-maps';
+import MapView from 'react-native-maps';
 import Searchbar from '../components/Searchbar'
-const { width, height } = Dimensions.get('window');
 
 
 
 class Map extends React.Component {
-
-
-
     render() {
         return (
             <View style={styles.container}>
@@ -68,7 +55,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         justifyContent: 'center',
         alignItems: 'center',
-       
+
     },
 });
 
