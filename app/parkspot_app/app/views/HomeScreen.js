@@ -18,10 +18,10 @@ class HomeScreen extends Component {
                 <View style={styles.cardContainer}>
                     {/* horizontal scroll bar emotion card  */}
                     <ScrollView horizontal={true}>
-                        <Card text={'Excellent'} />
-                        <Card text={'Excellent'} />
-                        <Card text={'Excellent'} />
-                        <Card text={'Excellent'} />
+                        <Card text={'Route 1'} />
+                        <Card text={'Route 2'} />
+                        <Card text={'Route 3'} />
+                        <Card text={'Route 4'} />
 
                     </ScrollView>
                 </View>
