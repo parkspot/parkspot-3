@@ -13,9 +13,7 @@ class HomeScreen extends Component {
 
             <View style={styles.container}>
                 <Map />
-                <View style={styles.buttonContainer}>
-                    <Searchbar placeholder="Hello" />
-                </View>
+
 
                 <View style={styles.cardContainer}>
                     {/* horizontal scroll bar emotion card  */}
@@ -26,6 +24,9 @@ class HomeScreen extends Component {
                         <Card text={'Excellent'} />
 
                     </ScrollView>
+                </View>
+                <View style={styles.buttonContainer}>
+                    <Searchbar placeholder="Hello" />
                 </View>
             </View>
         );
@@ -52,7 +53,8 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         flexWrap: 'nowrap',
-        alignItems: 'center',
+        alignItems: 'flex-end',
+        marginBottom: 10,
     },
 });
 
