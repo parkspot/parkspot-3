@@ -22,13 +22,7 @@ class HomeScreen extends Component {
 
                     </ScrollView>
                 </View>
-
-                <View style={styles.buttonContainer}>
-                    <Searchbar placeholder="Hello" />
-                </View>
-               
-
-
+                
                 <KeyboardAvoidingView style={styles.buttonContainer} behavior="padding" enabled keyboardVerticalOffset={10}>
                     <Searchbar placeholder="Destination..." />
                 </KeyboardAvoidingView>
