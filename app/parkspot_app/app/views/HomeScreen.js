@@ -3,6 +3,7 @@ import { View, StyleSheet, ScrollView, KeyboardAvoidingView} from 'react-native'
 import Searchbar from '../components/Searchbar'
 import Card from '../components/Card'
 import Map from '../components/Map'
+import WeatherIcon from '../components/WeatherIcon'
 
 
 class HomeScreen extends Component {
@@ -13,7 +14,7 @@ class HomeScreen extends Component {
 
             <View style={styles.container}>
                 <Map />
-
+                <WeatherIcon/>
 
                 <View style={styles.cardContainer}>
                     {/* horizontal scroll bar emotion card  */}
