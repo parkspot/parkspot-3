@@ -3,7 +3,7 @@ import { View, StyleSheet, ScrollView } from 'react-native'
 import Searchbar from '../components/Searchbar'
 import Card from '../components/Card'
 import Map from '../components/Map'
-
+import PreferenceContainer from '../components/PreferenceContainer'
 
 class HomeScreen extends Component {
     render() {
@@ -13,10 +13,7 @@ class HomeScreen extends Component {
 
             <View style={styles.container}>
                 <Map />
-
-
-                <View style={styles.cardContainer}>
-                    {/* horizontal scroll bar emotion card  */}
+                {/* <View style={styles.cardContainer}>
                     <ScrollView horizontal={true}>
                         <Card text={'Route 1'} />
                         <Card text={'Route 2'} />
@@ -27,7 +24,9 @@ class HomeScreen extends Component {
                 </View>
                 <View style={styles.buttonContainer}>
                     <Searchbar placeholder="Hello" />
-                </View>
+                </View> */}
+                <PreferenceContainer />
+
             </View>
         );
     }
