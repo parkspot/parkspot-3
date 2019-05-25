@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, ScrollView } from 'react-native'
+import { View, StyleSheet, ScrollView, KeyboardAvoidingView} from 'react-native'
 import Searchbar from '../components/Searchbar'
 import Card from '../components/Card'
 import Map from '../components/Map'
@@ -25,9 +25,9 @@ class HomeScreen extends Component {
 
                     </ScrollView>
                 </View>
-                <View style={styles.buttonContainer}>
-                    <Searchbar placeholder="Hello" />
-                </View>
+                <KeyboardAvoidingView style={styles.buttonContainer} behavior="padding" enabled keyboardVerticalOffset={10}>
+                    <Searchbar placeholder="Destination..." />
+                </KeyboardAvoidingView>
             </View>
         );
     }
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
         ...StyleSheet.absoluteFillObject,
     },
     buttonContainer: {
-        marginBottom: 20,
+        marginBottom: 40,
         justifyContent: 'center',
         alignItems: 'center',
 
