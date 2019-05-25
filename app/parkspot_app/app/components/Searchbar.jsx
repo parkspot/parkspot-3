@@ -22,7 +22,7 @@ class Searchbar extends Component {
 const styles = StyleSheet.create({
   inputField: {
     backgroundColor: '#ffffff',
-    opacity: 0.9,
+    opacity: 1.0,
     height: 55,
     width: 320,
     borderRadius: 50,
