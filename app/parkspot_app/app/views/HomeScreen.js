@@ -3,7 +3,7 @@ import { View, StyleSheet, ScrollView, KeyboardAvoidingView} from 'react-native'
 import Searchbar from '../components/Searchbar'
 import Card from '../components/Card'
 import Map from '../components/Map'
-
+import PreferenceContainer from '../components/PreferenceContainer'
 
 class HomeScreen extends Component {
     render() {
@@ -13,10 +13,7 @@ class HomeScreen extends Component {
 
             <View style={styles.container}>
                 <Map />
-
-
                 <View style={styles.cardContainer}>
-                    {/* horizontal scroll bar emotion card  */}
                     <ScrollView horizontal={true}>
                         <Card text={'Route 1'} />
                         <Card text={'Route 2'} />
@@ -25,9 +22,17 @@ class HomeScreen extends Component {
 
                     </ScrollView>
                 </View>
+
+                <View style={styles.buttonContainer}>
+                    <Searchbar placeholder="Hello" />
+                </View>
+               
+
+
                 <KeyboardAvoidingView style={styles.buttonContainer} behavior="padding" enabled keyboardVerticalOffset={10}>
                     <Searchbar placeholder="Destination..." />
                 </KeyboardAvoidingView>
+
             </View>
         );
     }
