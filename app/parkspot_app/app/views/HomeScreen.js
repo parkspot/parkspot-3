@@ -1,29 +1,28 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, ScrollView, KeyboardAvoidingView } from 'react-native'
+import { View, StyleSheet, ScrollView, Text, KeyboardAvoidingView } from 'react-native'
 import Searchbar from '../components/Searchbar'
 import Card from '../components/Card'
 import Map from '../components/Map'
 import Favorites from '../components/Favorites'
 import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
+import HomeOverlay from '../components/HomeOverlay';
 
 class HomeScreen extends Component {
     constructor(props) {
         super(props);
         this.favsElement = React.createRef();
+        this.state = {
+            isVisible: true,
+
+        }
     }
 
     render() {
         const config = {
             velocityThreshold: 0.3,
             directionalOffsetThreshold: 80
-        };
-
-
-
+        }
         return (
-
-
-
             <View style={styles.container}>
                 <Map />
                 {/* <View style={styles.cardContainer}>
@@ -35,6 +34,8 @@ class HomeScreen extends Component {
 
                     </ScrollView>
                 </View> */}
+
+                <HomeOverlay />
 
                 <KeyboardAvoidingView style={styles.buttonContainer} behavior="padding" enabled keyboardVerticalOffset={10}>
                     <Searchbar placeholder="Destination..." />
