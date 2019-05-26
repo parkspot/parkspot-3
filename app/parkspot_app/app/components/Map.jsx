@@ -3,37 +3,30 @@ import {
     StyleSheet,
     View,
 } from 'react-native';
-
 import MapView from 'react-native-maps';
-import Searchbar from '../components/Searchbar'
+
 
 
 
 class Map extends React.Component {
     render() {
         return (
-            <View style={styles.container}>
-                <MapView
-                    region={{
-                        latitude: 51.034809,
-                        longitude: 3.729268,
-                        latitudeDelta: 0.0922,
-                        longitudeDelta: 0.0421
-                    }}
-                    style={styles.map}
-                    showsUserLocation={true}
 
-                >
-                </MapView>
-                <View style={styles.buttonContainer}>
-                    <Searchbar placeholder="Hello" />
-                </View>
-            </View>
+            <MapView
+                region={{
+                    latitude: 51.034809,
+                    longitude: 3.729268,
+                    latitudeDelta: 0.0922,
+                    longitudeDelta: 0.0421
+                }}
+                style={styles.map}
+                showsUserLocation={true}
+
+            />
+
         );
     }
 }
-
-
 
 const styles = StyleSheet.create({
     container: {

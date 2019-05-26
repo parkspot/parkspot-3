@@ -21,12 +21,14 @@ class Searchbar extends Component {
 
 const styles = StyleSheet.create({
   inputField: {
+    paddingLeft: 20,
+    paddingRight: 20,
     backgroundColor: '#ffffff',
-    opacity: 0.9,
+    opacity: 1.0,
     height: 55,
     width: 320,
     borderRadius: 50,
-    textAlign: 'center',
+    textAlign: 'left',
     fontSize: 20,
     color: 'black',
   }
