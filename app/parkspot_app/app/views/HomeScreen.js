@@ -38,7 +38,6 @@ class HomeScreen extends Component {
 
                 <KeyboardAvoidingView style={styles.buttonContainer} behavior="padding" enabled keyboardVerticalOffset={10}>
                     <Searchbar placeholder="Destination..." />
-
                 </KeyboardAvoidingView>
 
                 <View style={styles.favorites} >
@@ -55,14 +54,6 @@ const styles = StyleSheet.create({
         height: 20,
         width: '100%',
 
-    },
-    swipeContainer: {
-        zIndex: 1,
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-        width: 400,
-        height: 100,
-        backgroundColor: 'transparent',
     },
     container: {
         ...StyleSheet.absoluteFillObject,

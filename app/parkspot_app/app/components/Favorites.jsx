@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-start',
         width: 400,
-        height: 70,
+        height: 100,
 
     },
     container: {
@@ -45,23 +45,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
 
 
-    },
-    map: {
-        ...StyleSheet.absoluteFillObject,
-    },
-    buttonContainer: {
-        marginBottom: 20,
-        justifyContent: 'center',
-        alignItems: 'center',
-
-    },
-    cardContainer: {
-        maxHeight: '70%',
-        flex: 1,
-        flexDirection: 'row',
-        flexWrap: 'nowrap',
-        alignItems: 'flex-end',
-        marginBottom: 10,
     },
 });
 

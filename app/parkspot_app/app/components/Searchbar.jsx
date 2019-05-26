@@ -31,6 +31,13 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     fontSize: 20,
     color: 'black',
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.09,
+    shadowRadius: 4.65,
+    elevation: 1,
   }
 })
 

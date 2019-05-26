@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Button, ScrollView, Text, Animated } from 'react-native'
-import Searchbar from '../Searchbar'
+import { View, StyleSheet, Button } from 'react-native'
 
 import SlidingUpPanel from 'rn-sliding-up-panel';
-import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
 import { Title } from '../Texts/'
 class SwipeUpContainer extends Component {
 
@@ -31,13 +29,11 @@ class SwipeUpContainer extends Component {
                 {/*<Button title='Show Settings' onPress={() => this._panel.show()} />*/}
                 <SlidingUpPanel ref={c => this._panel = c} friction={1.50} minimumVelocityThreshold={0.1} snappingPoints={[0, 80]}>
                     <View style={[{ height: this.props.height }, styles.container_panel]}>
-                        <GestureRecognizer style={styles.swipeContainer} config={config} onSwipeDown={() => this.ClosePanel()}>
-                            <View style={styles.container_preference}>
-                                {this.props.children}
-                                <Title text={this.props.titleText} />
-                                <Button title='Hide' onPress={() => { this.ClosePanel() }} />
-                            </View>
-                        </GestureRecognizer>
+                        <View style={styles.container_preference}>
+                            {this.props.children}
+                            <Title text={this.props.titleText} />
+                            <Button title='Hide' onPress={() => { this.ClosePanel() }} />
+                        </View>
                     </View>
                 </SlidingUpPanel>
             </View >
@@ -75,8 +71,14 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         width: '100%',
         marginTop: 10,
-
-
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 3,
+        },
+        shadowOpacity: 0.09,
+        shadowRadius: 4.65,
+        elevation: 1,
     },
 
     map: {
