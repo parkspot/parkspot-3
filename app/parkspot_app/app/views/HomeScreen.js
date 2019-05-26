@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, ScrollView, KeyboardAvoidingView} from 'react-native'
+import { View, StyleSheet, ScrollView, KeyboardAvoidingView } from 'react-native'
 import Searchbar from '../components/Searchbar'
 import Card from '../components/Card'
 import Map from '../components/Map'
-import PreferenceContainer from '../components/PreferenceContainer'
-import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
+import Favorites from '../components/Favorites'
+import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
 
 class HomeScreen extends Component {
     constructor(props) {
@@ -16,7 +16,9 @@ class HomeScreen extends Component {
         const config = {
             velocityThreshold: 0.3,
             directionalOffsetThreshold: 80
-          };
+        };
+
+
 
         return (
 
@@ -24,7 +26,7 @@ class HomeScreen extends Component {
 
             <View style={styles.container}>
                 <Map />
-                <View style={styles.cardContainer}>
+                {/* <View style={styles.cardContainer}>
                     <ScrollView horizontal={true}>
                         <Card text={'Route 1'} />
                         <Card text={'Route 2'} />
@@ -32,15 +34,16 @@ class HomeScreen extends Component {
                         <Card text={'Route 4'} />
 
                     </ScrollView>
-                </View>
-                
+                </View> */}
+
                 <KeyboardAvoidingView style={styles.buttonContainer} behavior="padding" enabled keyboardVerticalOffset={10}>
-                    <GestureRecognizer style={styles.swipeContainer} config={config} onSwipeUp={() => this.favsElement.current.ShowPanel()}>
-                        <Searchbar placeholder="Destination..." />
-                    </GestureRecognizer>
+                    <Searchbar placeholder="Destination..." />
+
                 </KeyboardAvoidingView>
 
-                <PreferenceContainer ref={this.favsElement}/>
+                <View style={styles.favorites} >
+                    <Favorites height={400} titleText='Favorites List' />
+                </View>
 
             </View>
         );
@@ -48,12 +51,19 @@ class HomeScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+    favorites: {
+        height: 20,
+        backgroundColor: 'red',
+        width: '100%',
+
+    },
     swipeContainer: {
         zIndex: 1,
         alignItems: 'center',
-        justifyContent: 'center',
+        justifyContent: 'flex-start',
         width: 400,
         height: 100,
+        backgroundColor: 'transparent',
     },
     container: {
         ...StyleSheet.absoluteFillObject,
@@ -64,10 +74,10 @@ const styles = StyleSheet.create({
         ...StyleSheet.absoluteFillObject,
     },
     buttonContainer: {
-        marginBottom: 40,
+        marginBottom: 20,
         justifyContent: 'center',
         alignItems: 'center',
-
+        zIndex: 2,
     },
     cardContainer: {
         maxHeight: '70%',

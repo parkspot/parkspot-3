@@ -3,7 +3,7 @@ import { Text, View, StyleSheet, ScrollView } from 'react-native'
 import { SwipeUpContainer } from './Containers'
 import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
 
-class Preference extends Component {
+class Favorites extends Component {
     constructor(props) {
         super(props);
         this.favsElement = React.createRef();
@@ -67,4 +67,4 @@ const styles = StyleSheet.create({
 });
 
 
-export default Preference
+export default Favorites
