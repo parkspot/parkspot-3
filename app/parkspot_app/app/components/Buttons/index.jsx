@@ -1,1 +1,5 @@
-export * from './RectangleButton'
+import RectangleButton from './RectangleButton'
+
+export {
+    RectangleButton
+}
