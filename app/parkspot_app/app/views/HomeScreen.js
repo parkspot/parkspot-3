@@ -53,7 +53,6 @@ class HomeScreen extends Component {
 const styles = StyleSheet.create({
     favorites: {
         height: 20,
-        backgroundColor: 'red',
         width: '100%',
 
     },

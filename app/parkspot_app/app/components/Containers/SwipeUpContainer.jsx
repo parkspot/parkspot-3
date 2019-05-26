@@ -9,8 +9,6 @@ class SwipeUpContainer extends Component {
 
     constructor(props) {
         super(props)
-
-        console.log(props)
     }
 
 
@@ -31,10 +29,11 @@ class SwipeUpContainer extends Component {
         return (
             <View style={styles.container}>
                 {/*<Button title='Show Settings' onPress={() => this._panel.show()} />*/}
-                <SlidingUpPanel ref={c => this._panel = c} friction={0.40} minimumVelocityThreshold={0.1} snappingPoints={[0, 80]}>
+                <SlidingUpPanel ref={c => this._panel = c} friction={1.50} minimumVelocityThreshold={0.1} snappingPoints={[0, 80]}>
                     <View style={[{ height: this.props.height }, styles.container_panel]}>
                         <GestureRecognizer style={styles.swipeContainer} config={config} onSwipeDown={() => this.ClosePanel()}>
                             <View style={styles.container_preference}>
+                                {this.props.children}
                                 <Title text={this.props.titleText} />
                                 <Button title='Hide' onPress={() => { this.ClosePanel() }} />
                             </View>
@@ -63,7 +62,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         width: '100%',
-        backgroundColor: 'red',
         position: 'absolute',
         bottom: 0,
     },
