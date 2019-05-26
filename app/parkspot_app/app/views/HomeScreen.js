@@ -4,9 +4,20 @@ import Searchbar from '../components/Searchbar'
 import Card from '../components/Card'
 import Map from '../components/Map'
 import PreferenceContainer from '../components/PreferenceContainer'
+import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
 class HomeScreen extends Component {
+    constructor(props) {
+        super(props);
+        this.favsElement = React.createRef();
+    }
+
     render() {
+        const config = {
+            velocityThreshold: 0.3,
+            directionalOffsetThreshold: 80
+          };
+
         return (
 
 
@@ -24,8 +35,12 @@ class HomeScreen extends Component {
                 </View>
                 
                 <KeyboardAvoidingView style={styles.buttonContainer} behavior="padding" enabled keyboardVerticalOffset={10}>
-                    <Searchbar placeholder="Destination..." />
+                    <GestureRecognizer style={styles.swipeContainer} config={config} onSwipeUp={() => this.favsElement.current.ShowPanel()}>
+                        <Searchbar placeholder="Destination..." />
+                    </GestureRecognizer>
                 </KeyboardAvoidingView>
+
+                <PreferenceContainer ref={this.favsElement}/>
 
             </View>
         );
@@ -33,6 +48,13 @@ class HomeScreen extends Component {
 }
 
 const styles = StyleSheet.create({
+    swipeContainer: {
+        zIndex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        width: 400,
+        height: 100,
+    },
     container: {
         ...StyleSheet.absoluteFillObject,
         justifyContent: 'flex-end',

@@ -4,6 +4,7 @@ import Searchbar from '../components/Searchbar'
 import Card from '../components/Card'
 import Map from '../components/Map'
 import SlidingUpPanel from 'rn-sliding-up-panel';
+import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 
 class PreferenceContainer extends Component {
 
@@ -11,18 +12,27 @@ class PreferenceContainer extends Component {
         this._panel.hide()
     }
 
+    ShowPanel = async () => {
+        this._panel.show()
+    }
+
     render() {
+        const config = {
+            velocityThreshold: 0.3,
+            directionalOffsetThreshold: 80
+          };
+
         return (
             <View style={styles.container}>
-                <Button title='Show Settings' onPress={() => this._panel.show()} />
-                <SlidingUpPanel ref={c => this._panel = c} friction={0.45}>
+                {/*<Button title='Show Settings' onPress={() => this._panel.show()} />*/}
+                <SlidingUpPanel ref={c => this._panel = c} friction={1.5} minimumVelocityThreshold={0.5} snappingPoints={[0,80]}>
                     <View style={styles.container_panel}>
-                        <Searchbar placeholder="hello" />
-                        <View style={styles.container_preference}>
-                            <Text>Here is the content inside panel</Text>
-                            <Button title='Hide' onPress={() => { this.SaveSettingsAndClosePanel() }} />
-                        </View>
-
+                        <GestureRecognizer style={styles.swipeContainer} config={config} onSwipeDown={() => this.SaveSettingsAndClosePanel()}>
+                            <View style={styles.container_preference}>
+                                <Text>Here is the content inside panel</Text>
+                                <Button title='Hide' onPress={() => { this.SaveSettingsAndClosePanel() }} />
+                            </View>
+                        </GestureRecognizer>
                     </View>
                 </SlidingUpPanel>
             </View >
@@ -32,16 +42,19 @@ class PreferenceContainer extends Component {
 
 
 const styles = StyleSheet.create({
+    swipeContainer: {
+        width: "100%",
+        height: "100%",
+    },
     container: {
         backgroundColor: 'white',
         alignItems: 'center',
         justifyContent: 'center',
         width: '100%',
-        height: '5%',
+        height: '0%',
     },
     container_panel: {
         height: '100%',
-
         alignItems: 'center',
         justifyContent: 'center',
         width: '100%',
@@ -50,6 +63,7 @@ const styles = StyleSheet.create({
     },
 
     container_preference: {
+        borderRadius: 20,
         height: '100%',
         backgroundColor: 'white',
         alignItems: 'center',
