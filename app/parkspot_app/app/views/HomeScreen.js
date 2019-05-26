@@ -4,7 +4,8 @@ import Searchbar from '../components/Searchbar'
 import Card from '../components/Card'
 import Map from '../components/Map'
 import Favorites from '../components/Favorites'
-import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
+import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures'
+import {RectangleButton} from '../components/Buttons'
 
 class HomeScreen extends Component {
     constructor(props) {
@@ -35,7 +36,7 @@ class HomeScreen extends Component {
 
                     </ScrollView>
                 </View> */}
-
+                <RectangleButton title="Search"></RectangleButton>
                 <KeyboardAvoidingView style={styles.buttonContainer} behavior="padding" enabled keyboardVerticalOffset={10}>
                     <Searchbar placeholder="Destination..." />
                 </KeyboardAvoidingView>
