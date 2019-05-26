@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { LinearGradient } from 'expo'
 
 class RectangleButton extends Component {
 
@@ -7,11 +8,14 @@ class RectangleButton extends Component {
         super(props)
     }
 
-    render() {
+    
 
+    render() {
         return (
-            <TouchableOpacity style={styles.rectangleButtonContainer} title={this.props.title} onPress={() => {}}>
-                <Text style={styles.text}> Search </Text>
+            <TouchableOpacity style={styles.rectangleButtonContainer} onPress={() => {/* Here comes function */}}>
+                <LinearGradient colors={this.props.color} style={styles.gradientContainer}>
+                        <Text style={styles.text}> Search </Text>
+                </LinearGradient>
             </TouchableOpacity>
         )
     }
@@ -20,6 +24,11 @@ class RectangleButton extends Component {
 
 const styles = StyleSheet.create({
     rectangleButtonContainer: {
+        width: "100%",
+        justifyContent: "center",
+        alignItems: "center",
+    },
+    gradientContainer: {
         justifyContent: "center",
         alignItems: "center",
         width: "60%",
