@@ -10,16 +10,20 @@ class Favorites extends Component {
         this.favsElement = React.createRef();
     }
 
+    SwipedUp = () => {
+        this.favsElement.current.ShowPanel()
+    }
 
     render() {
         const config = {
             velocityThreshold: 0.3,
             directionalOffsetThreshold: 80
         };
+
         return (
 
             <View style={styles.container}>
-                <GestureRecognizer style={styles.swipeContainer} config={config} onSwipeUp={() => this.favsElement.current.ShowPanel()}></GestureRecognizer>
+                <GestureRecognizer style={styles.swipeContainer} config={config} onSwipeUp={() => this.SwipedUp()}></GestureRecognizer>
                 < SwipeUpContainer ref={this.favsElement} height={this.props.height} titleText={this.props.titleText} >
                     {/* list of text componenten */}
                     <FavoritesListItem/>
@@ -34,12 +38,12 @@ class Favorites extends Component {
 }
 const styles = StyleSheet.create({
     swipeContainer: {
-        zIndex: 1,
+        position: "absolute",
+        zIndex: -1,
         alignItems: 'center',
         justifyContent: 'flex-start',
         width: 400,
         height: 100,
-
     },
     container: {
         ...StyleSheet.absoluteFillObject,
