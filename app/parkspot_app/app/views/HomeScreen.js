@@ -41,7 +41,7 @@ class HomeScreen extends Component {
                 </KeyboardAvoidingView>
 
                 <View style={styles.favorites} >
-                    <Favorites height={400} titleText='Favorites List' />
+                    <Favorites height={400} titleText='Favorites' />
                 </View>
 
             </View>

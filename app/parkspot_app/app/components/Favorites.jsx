@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, ScrollView } from 'react-native'
 import { SwipeUpContainer } from './Containers'
-import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
+import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures'
+import FavoritesListItem from '../components/FavoritesListItem'
 
 class Favorites extends Component {
     constructor(props) {
@@ -18,13 +19,14 @@ class Favorites extends Component {
         return (
 
             <View style={styles.container}>
-
-                <GestureRecognizer style={styles.swipeContainer} config={config} onSwipeUp={() => this.favsElement.current.ShowPanel()}>
-
-                </GestureRecognizer>
+                <GestureRecognizer style={styles.swipeContainer} config={config} onSwipeUp={() => this.favsElement.current.ShowPanel()}></GestureRecognizer>
                 < SwipeUpContainer ref={this.favsElement} height={this.props.height} titleText={this.props.titleText} >
                     {/* list of text componenten */}
-                    <Text> Im the greatest</Text>
+                    <FavoritesListItem/>
+                    <FavoritesListItem/>
+                    <FavoritesListItem/>
+                    <FavoritesListItem/>
+                    <View style={styles.ruler}></View>
                 </SwipeUpContainer>
             </View>
         );
@@ -43,9 +45,12 @@ const styles = StyleSheet.create({
         ...StyleSheet.absoluteFillObject,
         justifyContent: 'flex-end',
         alignItems: 'center',
-
-
     },
+    ruler: {
+        borderColor: "#707070",
+        borderBottomWidth: 1,
+        opacity: 0.2,
+    }
 });
 
 

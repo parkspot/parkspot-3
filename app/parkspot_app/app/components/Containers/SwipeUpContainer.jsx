@@ -30,9 +30,10 @@ class SwipeUpContainer extends Component {
                 <SlidingUpPanel ref={c => this._panel = c} friction={1.50} minimumVelocityThreshold={0.1} snappingPoints={[0, 80]}>
                     <View style={[{ height: this.props.height }, styles.container_panel]}>
                         <View style={styles.container_preference}>
-                            {this.props.children}
+                            <View style={styles.dropDownElement}/>
                             <Title text={this.props.titleText} />
-                            <Button title='Hide' onPress={() => { this.ClosePanel() }} />
+                            {/*<Button title='Hide' onPress={() => { this.ClosePanel() }} />*/}
+                            {this.props.children}
                         </View>
                     </View>
                 </SlidingUpPanel>
@@ -55,8 +56,6 @@ const styles = StyleSheet.create({
         height: '0%',
     },
     container_panel: {
-        alignItems: 'center',
-        justifyContent: 'center',
         width: '100%',
         position: 'absolute',
         bottom: 0,
@@ -67,8 +66,6 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         height: '100%',
         backgroundColor: 'white',
-        alignItems: 'center',
-        justifyContent: 'center',
         width: '100%',
         marginTop: 10,
         shadowColor: "#000",
@@ -98,5 +95,14 @@ const styles = StyleSheet.create({
         alignItems: 'flex-end',
         marginBottom: 10,
     },
+    dropDownElement: {
+        width:"13%",
+        height: 7,
+        alignSelf: "center",
+        marginTop: 7,
+        borderRadius: 20,
+        backgroundColor: '#000',
+        opacity: 0.2
+    }
 });
 export default SwipeUpContainer
