@@ -4,26 +4,14 @@ import Searchbar from '../components/Searchbar'
 import Card from '../components/Card'
 import Map from '../components/Map'
 import Favorites from '../components/Favorites'
-import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
 
 class HomeScreen extends Component {
     constructor(props) {
         super(props);
         this.favsElement = React.createRef();
     }
-
     render() {
-        const config = {
-            velocityThreshold: 0.3,
-            directionalOffsetThreshold: 80
-        };
-
-
-
         return (
-
-
-
             <View style={styles.container}>
                 <Map />
                 {/* <View style={styles.cardContainer}>
@@ -41,7 +29,7 @@ class HomeScreen extends Component {
                 </KeyboardAvoidingView>
 
                 <View style={styles.favorites} >
-                    <Favorites height={400} titleText='Favorites List' />
+                    <Favorites height={500} titleText='Favorites' />
                 </View>
 
             </View>
@@ -53,7 +41,8 @@ const styles = StyleSheet.create({
     favorites: {
         height: 20,
         width: '100%',
-
+        position: "absolute",
+        zIndex: 2,
     },
     container: {
         ...StyleSheet.absoluteFillObject,
@@ -64,9 +53,10 @@ const styles = StyleSheet.create({
         ...StyleSheet.absoluteFillObject,
     },
     buttonContainer: {
-        marginBottom: 20,
+        bottom: 80,
         justifyContent: 'center',
         alignItems: 'center',
+        position: "absolute",
         zIndex: 2,
     },
     cardContainer: {

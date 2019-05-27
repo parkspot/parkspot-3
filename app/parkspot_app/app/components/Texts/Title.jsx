@@ -5,8 +5,10 @@ const styles = StyleSheet.create({
     subtitle: {
         fontSize: 20,
         fontWeight: '600',
-        textAlign: 'center',
-        color: '#000',
+        color: '#484848',
+        marginLeft: 20,
+        marginTop: 10,
+        marginBottom: 15,
     }
 })
 
