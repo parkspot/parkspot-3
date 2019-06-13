@@ -24,7 +24,7 @@ class Favorites extends Component {
 
             <View style={styles.container}>
                 <GestureRecognizer style={styles.swipeContainer} config={config} onSwipeUp={() => this.SwipedUp()}></GestureRecognizer>
-                < SwipeUpContainer ref={this.favsElement} height={this.props.height} titleText={this.props.titleText} >
+                < SwipeUpContainer ref={this.favsElement} height={this.props.height} titleText={"Favorites"} >
                     {/* list of text componenten */}
                     <FavoritesListItem/>
                     <FavoritesListItem/>

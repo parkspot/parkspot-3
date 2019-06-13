@@ -4,6 +4,7 @@ import Searchbar from '../components/Searchbar'
 import Card from '../components/Card'
 import Map from '../components/Map'
 import Favorites from '../components/Favorites'
+import Preferences from '../components/Preferences'
 
 class HomeScreen extends Component {
     constructor(props) {
@@ -29,7 +30,8 @@ class HomeScreen extends Component {
                 </KeyboardAvoidingView>
 
                 <View style={styles.favorites} >
-                    <Favorites height={500} titleText='Favorites' />
+                    {/*<Favorites height={500}/>*/}
+                    <Preferences height={700}/>
                 </View>
 
             </View>

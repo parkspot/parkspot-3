@@ -79,24 +79,6 @@ const styles = StyleSheet.create({
         shadowRadius: 4.65,
         elevation: 1,
     },
-
-    map: {
-        ...StyleSheet.absoluteFillObject,
-    },
-    buttonContainer: {
-        marginBottom: 20,
-        justifyContent: 'center',
-        alignItems: 'center',
-
-    },
-    cardContainer: {
-        maxHeight: '70%',
-        flex: 1,
-        flexDirection: 'row',
-        flexWrap: 'nowrap',
-        alignItems: 'flex-end',
-        marginBottom: 10,
-    },
     dropDownElement: {
         width:"13%",
         height: 7,
