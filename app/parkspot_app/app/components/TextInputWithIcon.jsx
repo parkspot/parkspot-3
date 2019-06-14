@@ -28,21 +28,24 @@ styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-around",
         borderRadius: 10,
-        backgroundColor: 'rgba(250, 250, 250, .2)',
+        backgroundColor: 'rgba(190, 190, 190, .7)',
         height: 60,
         width: "90%",
         marginTop: 5,
         marginBottom: 5,
+        
+
     },
     icon: {
         alignSelf: 'center',
         marginLeft: 10
     },
     loginFormTextInput: {
+        color: '#FFF',
         alignSelf: 'center',
         paddingLeft: 10,
         height: 43,
         fontSize: 14,
-        width: "80%"
+        width: "80%",
     }
 })

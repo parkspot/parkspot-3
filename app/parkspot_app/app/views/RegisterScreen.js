@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Keyboard, View, TouchableWithoutFeedback, KeyboardAvoidingView, StyleSheet } from 'react-native'
+import { Keyboard, View, TouchableWithoutFeedback, KeyboardAvoidingView, StyleSheet, ImageBackground } from 'react-native'
 import { LinearGradient } from 'expo'
 
 import RegisterForm from '../components/RegisterForm'
@@ -16,13 +16,13 @@ class RegisterScreen extends Component {
         return (
             <KeyboardAvoidingView style={styles.containerView} behavior="padding">
                 <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                    <LinearGradient colors={["#9CD994", "#96CA9D"]} style={{ width: "100%", height: "100%"}}>
+                    <ImageBackground source={require('../assets/street_view_filter.png')} style={{width: '100%', height: '100%',}}>
                         <View style={styles.registerScreenContainer}>
                             <View style={styles.registerFormView}>
                                 <RegisterForm />
                             </View>
                         </View>
-                    </LinearGradient>
+                    </ImageBackground>
                 </TouchableWithoutFeedback>
           </KeyboardAvoidingView>
         );

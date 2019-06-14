@@ -7,7 +7,7 @@ export default class Main extends React.Component {
     return (
 
 
-      <LogInScreen />
+      <RegisterScreen />
 
 
     );

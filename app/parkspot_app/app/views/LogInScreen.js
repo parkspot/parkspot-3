@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Keyboard, View, TouchableWithoutFeedback, KeyboardAvoidingView, StyleSheet } from 'react-native'
+import { Keyboard, View, TouchableWithoutFeedback, KeyboardAvoidingView, StyleSheet, ImageBackground } from 'react-native'
 import { LinearGradient } from 'expo'
 
 import LoginForm from '../components/LoginForm'
@@ -15,15 +15,15 @@ class LogInScreen extends Component {
     render() {
         return (
             <KeyboardAvoidingView style={styles.containerView} behavior="padding">
-                <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                    <LinearGradient colors={["#9CD994", "#96CA9D"]} style={{ width: "100%", height: "100%"}}>
+                <ImageBackground source={require('../assets/street_view_filter.png')} style={{width: '100%', height: '100%',}}>
+                    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                         <View style={styles.loginScreenContainer}>
                             <View style={styles.loginFormView}>
                                 <LoginForm />
                             </View>
                         </View>
-                    </LinearGradient>
-                </TouchableWithoutFeedback>
+                    </TouchableWithoutFeedback>
+                </ImageBackground>
           </KeyboardAvoidingView>
         );
     }
