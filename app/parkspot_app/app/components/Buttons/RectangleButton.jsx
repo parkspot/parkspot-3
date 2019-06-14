@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
         width: "100%",
         justifyContent: "center",
         alignItems: "center",
+        marginBottom: 200,
     },
     gradientContainer: {
         justifyContent: "center",
@@ -39,7 +40,7 @@ const styles = StyleSheet.create({
     },
     text: {
         color: "#FFF",
-        fontSize: 18
+        fontSize: 24,
     }
 });
 export default RectangleButton
