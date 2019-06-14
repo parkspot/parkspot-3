@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {Router, Stack, Scene} from 'react-native-router-flux'
+import {Router, Scene} from 'react-native-router-flux'
 
 import LogInScreen from '../../views/LogInScreen'
 import RegisterScreen from '../../views/RegisterScreen'

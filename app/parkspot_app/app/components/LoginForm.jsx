@@ -1,11 +1,19 @@
 import React, { Component } from 'react'
 import { View, Text, Image, StyleSheet,TouchableOpacity} from 'react-native'
-import { Button } from 'react-native-elements';
+import { Button } from 'react-native-elements'
 import TextInputWithIcon from '../components/TextInputWithIcon'
-import { Actions } from 'react-native-router-flux';
+import { Actions } from 'react-native-router-flux'
+import Dialog, { DialogContent, DialogFooter,DialogButton, DialogTitle } from 'react-native-popup-dialog'
 
 
 export default class LoginForm extends Component {
+
+    constructor(props){
+        super(props)
+        this.state = {
+            dialogVisible: false
+        }
+    }
 
     onLoginPress() {
         Actions.home()
@@ -46,12 +54,36 @@ export default class LoginForm extends Component {
                             Create account
                         </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.help}>
+                    <TouchableOpacity style={styles.help} onPress={() => this.setState({dialogVisible: true})}>
                         <Text style={styles.whiteText}>
                             Need help?
                         </Text>
                     </TouchableOpacity>
                 </View>
+                <Dialog
+                dialogTitle={<DialogTitle title="Help" />}
+                visible={this.state.dialogVisible}
+                onTouchOutside={() => {
+                this.setState({ dialogVisible: false })
+                }}
+                footer={
+                    <DialogFooter>
+                      <DialogButton
+                        text="CANCEL"
+                        onPress={() => {this.setState({ dialogVisible: false })}}
+                      />
+                      <DialogButton
+                        text="OK"
+                        onPress={() => {this.setState({ dialogVisible: false })}}
+                      />
+                    </DialogFooter>
+                  }
+                >
+                    <DialogContent>
+                        <Text style={{width:"100%", fontSize:14, marginTop: 10}}>To Sign in:{"\n"} Please fill in your email-address and{"\n"} password in the corresponding input fields and {"\n"} press the "Get started !" button.</Text>
+                        <Text style={{width:"100%", fontSize:14, marginTop: 10}}>To Register:{"\n"} Please press the "Create account" button{"\n"} on the bottom of the screen.</Text>
+                    </DialogContent>
+                </Dialog>
             </React.Fragment>
         )
     }
