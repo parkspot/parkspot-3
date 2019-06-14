@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { Keyboard, View, TouchableWithoutFeedback, KeyboardAvoidingView, StyleSheet, ImageBackground } from 'react-native'
-import { LinearGradient } from 'expo'
 
 import LoginForm from '../components/LoginForm'
 

@@ -5,16 +5,46 @@ import TextInputWithIcon from '../components/TextInputWithIcon'
 import { Actions } from 'react-native-router-flux'
 import Dialog, { DialogContent, DialogFooter,DialogButton, DialogTitle } from 'react-native-popup-dialog'
 
+import validate from '../components/Validation/Validate'
+
 export default class RegisterForm extends Component {
     constructor(props){
         super(props)
         this.state = {
-            dialogVisible: false
+            dialogVisible: false,
+            email: "",
+            password: "",
+            errorPass: false,
+            errorEmail: false,
+            validatedPass: false,
+            validatedEmail: false,
+            errorPassVisible: false,
+            errorEmailVisible: false,
         }
     }
 
+    validateEmail() {
+        return validate(this.state.email, "email")?true:false
+    }
+
+    validatePass() {
+        return validate(this.state.password, "password")?true:false
+    }
+
     onLoginPress() {
-        Actions.home()
+        if(!this.validateEmail()){
+            this.setState({errorEmailVisible: true, errorEmail: true, validatedEmail: false})
+        } else {
+            this.setState({validatedEmail: true, errorEmail: false})
+        }
+        if(!this.validatePass()){
+            this.setState({errorPass: true, errorPassVisible: true, validatedPass: false})
+        } else {
+            this.setState({validatedPass: true, errorPass: false})
+        }
+        if (this.validateEmail() && this.validatePass()) {
+            Actions.home()
+        }
     }
 
     render() {
@@ -25,21 +55,78 @@ export default class RegisterForm extends Component {
                 source={require("../assets/parkspot.png")}
                 />
                 <TextInputWithIcon 
+                onChangeText={(email) => this.setState({email})}
                 icon="ios-mail" 
                 placeholder="Email" 
                 returnkeytype="next" 
                 textcontenttype="emailAddress" 
                 keyboardtype="email-address" 
                 securetextentry={false}
+                error={this.state.errorEmail}
+                validated={this.state.validatedEmail}
                 />
+                <Dialog
+                dialogTitle={<DialogTitle title="Error in Email!" />}
+                visible={this.state.errorEmailVisible}
+                onTouchOutside={() => {
+                this.setState({ errorEmailVisible: false })
+                }}
+                footer={
+                    <DialogFooter>
+                      <DialogButton
+                        text="CANCEL"
+                        onPress={() => {this.setState({ errorEmailVisible: false })}}
+                      />
+                      <DialogButton
+                        text="OK"
+                        onPress={() => {this.setState({ errorEmailVisible: false })}}
+                      />
+                    </DialogFooter>
+                  }
+                >
+                    <DialogContent>
+                        <Text style={{marginTop: 10}}>This is not a valid Email.</Text>
+                        <Text>Example: jhon.doe@gmail.com</Text>
+                    </DialogContent>
+                </Dialog>
                 <TextInputWithIcon 
+                onChangeText={(password) => this.setState({password})}
                 icon="ios-lock" 
                 placeholder="Password" 
                 returnkeytype="send" 
                 textcontenttype="password" 
                 keyboardtype="default" 
                 securetextentry={true}
+                error={this.state.errorPass}
+                validated={this.state.validatedPass}
                 />
+                <Dialog
+                dialogTitle={<DialogTitle title="Error in Password!" />}
+                visible={this.state.errorPassVisible}
+                onTouchOutside={() => {
+                this.setState({ errorPassVisible: false })
+                }}
+                footer={
+                    <DialogFooter>
+                      <DialogButton
+                        text="CANCEL"
+                        onPress={() => {this.setState({ errorPassVisible: false })}}
+                      />
+                      <DialogButton
+                        text="OK"
+                        onPress={() => {this.setState({ errorPassVisible: false })}}
+                      />
+                    </DialogFooter>
+                  }
+                >
+                    <DialogContent>
+                        <Text style={{marginTop: 10}}>This is not a valid Password.</Text>
+                        <Text>Must contain atleast 1 lowercase character.</Text>
+                        <Text>Must contain atleast 1 uppercase character.</Text>
+                        <Text>Must contain atleast 1 number.</Text>
+                        <Text>Must be atleast 8 characters long</Text>
+                    </DialogContent>
+                </Dialog>
                 <Button
                 buttonStyle={styles.registerButton}
                 onPress={() => this.onLoginPress()}
@@ -96,7 +183,14 @@ const styles = StyleSheet.create({
         marginTop: 80,
         marginBottom: 40
     },
-     
+    hideError: {
+        display: "none"
+    },
+    showError: {
+        display: "flex",
+        color: "#FFF",
+        fontSize: 14
+    },
     registerButton: {
         alignSelf: 'center',
         backgroundColor: '#46CA5D',

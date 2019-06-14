@@ -5,13 +5,16 @@ import TextInputWithIcon from '../components/TextInputWithIcon'
 import { Actions } from 'react-native-router-flux'
 import Dialog, { DialogContent, DialogFooter,DialogButton, DialogTitle } from 'react-native-popup-dialog'
 
-
 export default class LoginForm extends Component {
 
     constructor(props){
         super(props)
         this.state = {
-            dialogVisible: false
+            dialogVisible: false,
+            email: "",
+            emailError: "",
+            password: "",
+            passwordError: ""
         }
     }
 
@@ -27,20 +30,26 @@ export default class LoginForm extends Component {
                 source={require("../assets/parkspot.png")}
                 />
                 <TextInputWithIcon 
+                onChangeText={(email) => this.setState({email})}
                 icon="ios-mail" 
                 placeholder="Email" 
                 returnkeytype="next" 
                 textcontenttype="emailAddress" 
                 keyboardtype="email-address" 
                 securetextentry={false}
+                error={false}
+                validated={false}
                 />
                 <TextInputWithIcon 
+                onChangeText={(password) => this.setState({password})}
                 icon="ios-lock" 
                 placeholder="Password" 
                 returnkeytype="send" 
                 textcontenttype="password" 
                 keyboardtype="default" 
                 securetextentry={true}
+                error={false}
+                validated={false}
                 />
                 <Button
                 buttonStyle={styles.loginButton}
