@@ -2,11 +2,13 @@ import React, { Component } from 'react'
 import { View, Text, Image, StyleSheet,TouchableOpacity} from 'react-native'
 import { Button } from 'react-native-elements';
 import TextInputWithIcon from '../components/TextInputWithIcon'
+import { Actions } from 'react-native-router-flux';
+
 
 export default class LoginForm extends Component {
 
     onLoginPress() {
-
+        Actions.home()
     }
 
     render() {
@@ -39,7 +41,7 @@ export default class LoginForm extends Component {
                 color="#4CD964"
                 />
                 <View style={styles.registerHelpContainer}>
-                    <TouchableOpacity style={styles.register}>
+                    <TouchableOpacity style={styles.register} onPress={() => Actions.register()}>
                         <Text style={styles.whiteText}>
                             Create account
                         </Text>
