@@ -12,7 +12,7 @@ class RectangleButton extends Component {
 
     render() {
         return (
-            <TouchableOpacity style={styles.rectangleButtonContainer} onPress={() => {/* Here comes function */}}>
+            <TouchableOpacity style={styles.rectangleButtonContainer} onPress={this.props.onPress}>
                 <LinearGradient colors={this.props.color} style={styles.gradientContainer}>
                         <Text style={styles.text}> Search </Text>
                 </LinearGradient>

@@ -12,6 +12,7 @@ class Searchbar extends Component {
       <TextInput
         style={styles.inputField}
         placeholder={placeholder}
+        onSubmitEditing={this.props.submitHandler}
       />
     );
   }

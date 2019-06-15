@@ -11,7 +11,7 @@ import RectangleButton from './Buttons/RectangleButton';
 class Preferences extends Component {
     constructor(props) {
         super(props);
-        this.favsElement = React.createRef();
+        this.prefElement = React.createRef();
         this.state = {
             zone : "Underground Parking",
             price : "0",
@@ -46,10 +46,14 @@ class Preferences extends Component {
         return Math.round(float * 100) / 100
     }
 
-    slidingComplete = () => {
-        console.log('lol')
+    searchHandler = () => {
+        this.props.searchHandler()
+        this.prefElement.current.ClosePanel()
     }
 
+    showPrefPanel = () => {
+        this.prefElement.current.ShowPanel()
+    }
 
     render() {
         const config = {
@@ -60,10 +64,10 @@ class Preferences extends Component {
 
             <View style={styles.container}>
 
-                <GestureRecognizer style={styles.swipeContainer} config={config} onSwipeUp={() => this.favsElement.current.ShowPanel()}>
+                <GestureRecognizer style={styles.swipeContainer} config={config} onSwipeUp={() => this.prefElement.current.ShowPanel()}>
 
                 </GestureRecognizer>
-                < SwipeUpContainer ref={this.favsElement} height={this.props.height} titleText={"Preferences"} >
+                < SwipeUpContainer ref={this.prefElement} height={this.props.height} titleText={"Preferences"} >
                         <View style={styles.listItemContainer_normal}>
                             <View style={styles.listItemRowContainer}>
                                 <Text style={styles.item} >Zone</Text>
@@ -120,7 +124,7 @@ class Preferences extends Component {
                             </View>
                         </View>
 
-                        <RectangleButton color={["#4CD964", "#46CA5D"]}/>
+                        <RectangleButton color={["#4CD964", "#46CA5D"]} onPress={this.searchHandler}/>
 
                         <QuickPicker />
                 </SwipeUpContainer>
@@ -160,11 +164,6 @@ const styles = StyleSheet.create({
         justifyContent: "space-between",
         alignItems: "center",
         padding: 20,
-    },
-    ruler: {
-        borderColor: "#707070",
-        borderBottomWidth: 0.9,
-        opacity: 0.2,
     },
     swipeContainer: {
         zIndex: 1,

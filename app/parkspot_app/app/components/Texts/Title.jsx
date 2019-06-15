@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Text, StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
-    subtitle: {
+    title: {
         fontSize: 20,
         fontWeight: '600',
         color: '#484848',
@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
 })
 
 const Title = ({ text }) => (
-    <Text style={styles.subtitle}>{text}</Text>
+    <Text style={styles.title}>{text}</Text>
 )
 
 export default Title

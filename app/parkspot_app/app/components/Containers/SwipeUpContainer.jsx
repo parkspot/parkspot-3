@@ -19,15 +19,11 @@ class SwipeUpContainer extends Component {
     }
 
     render() {
-        const config = {
-            velocityThreshold: 0.3,
-            directionalOffsetThreshold: 80
-        };
 
         return (
             <View style={styles.container}>
                 {/*<Button title='Show Settings' onPress={() => this._panel.show()} />*/}
-                <SlidingUpPanel ref={c => this._panel = c} friction={1.50} minimumVelocityThreshold={0.1} snappingPoints={[0, 80]}>
+                <SlidingUpPanel ref={c => this._panel = c} friction={0.80} minimumVelocityThreshold={0.1} snappingPoints={[0, 80]}>
                     <View style={[{ height: this.props.height }, styles.container_panel]}>
                         <View style={styles.container_preference}>
                             <View style={styles.dropDownElement}/>
