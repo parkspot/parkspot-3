@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, Image, StyleSheet,TouchableOpacity} from 'react-native'
+import { View, Text, Image, StyleSheet,TouchableOpacity, AsyncStorage} from 'react-native'
 import { Button } from 'react-native-elements'
 import TextInputWithIcon from '../components/TextInputWithIcon'
 import { Actions } from 'react-native-router-flux'
@@ -10,16 +10,97 @@ export default class LoginForm extends Component {
     constructor(props){
         super(props)
         this.state = {
-            dialogVisible: false,
             email: "",
-            emailError: "",
             password: "",
-            passwordError: ""
+            dialogVisible: false,
+            errorPass: false,
+            errorEmail: false,
+            EmailInUse: false,
+            errorPassVisible: false,
+            errorEmailVisible: false,
         }
     }
 
-    onLoginPress() {
-        Actions.home()
+    async checkEmailInDatabase() {
+        let {email} = this.state
+        this.setState({EmailInUse: false})
+        const url = "http://192.168.1.5:8080/api/v1/users"
+        await fetch(url)
+        .then(response => 
+            response.json()
+            .then(data => {
+                data.forEach(element => {
+                    if(element.email == email){
+                        this.setState({EmailInUse: true})
+                    }
+                }) 
+            })
+        ).catch(error => {
+            console.error(error)
+        })
+    }
+
+    async postUserToAuthentication(){
+        const url = "http://192.168.1.5:8080/api/v1/login/local"
+        var data = {
+            email: this.state.email,
+            password: this.state.password
+        }
+        
+        await fetch(url, {
+          method: 'POST', // or 'PUT'
+          body: JSON.stringify(data), // data can be `string` or {object}!
+          headers:{
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(res => res.json())
+        .then(response => {
+            console.log('Success:', JSON.stringify(response))
+            console.log('Token:', response.token)
+            this._postDataToAsyncStorage('userToken', response.token)
+        })
+        .catch(error => {
+            console.log('Error:', error)
+            this.setState({errorPassVisible: true})
+
+        })
+    }
+
+    async _postDataToAsyncStorage (key, value) {
+        try {
+            await AsyncStorage.setItem(key, value);
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    async _retrieveDataFromAsyncStorage(key) {
+        try {
+          const value = await AsyncStorage.getItem(key);
+          if (value !== null) {
+            // We have data!!
+            console.log(value);
+          } else {
+              console.log('no value')
+          }
+        } catch (error) {
+          // Error retrieving data
+          console.error(error)
+        }
+      }
+
+    async onLoginPress() {
+        await this.checkEmailInDatabase()
+        if(this.state.EmailInUse){
+            this.setState({errorEmail: false})
+            await this.postUserToAuthentication()
+            if (this._retrieveDataFromAsyncStorage('userToken')){
+                Actions.home()
+            }
+        } else {
+            this.setState({errorEmailVisible: true, errorEmail: true})
+        }
     }
 
     render() {
@@ -37,9 +118,32 @@ export default class LoginForm extends Component {
                 textcontenttype="emailAddress" 
                 keyboardtype="email-address" 
                 securetextentry={false}
-                error={false}
+                error={this.state.errorEmail}
                 validated={false}
                 />
+                <Dialog
+                dialogTitle={<DialogTitle title="Error in Email!" />}
+                visible={this.state.errorEmailVisible}
+                onTouchOutside={() => {
+                this.setState({ errorEmailVisible: false })
+                }}
+                footer={
+                    <DialogFooter>
+                      <DialogButton
+                        text="CANCEL"
+                        onPress={() => {this.setState({ errorEmailVisible: false })}}
+                      />
+                      <DialogButton
+                        text="OK"
+                        onPress={() => {this.setState({ errorEmailVisible: false })}}
+                      />
+                    </DialogFooter>
+                  }
+                >    
+                <DialogContent>
+                <Text style={{marginTop: 10}}>This is Email is not used.         </Text>
+                </DialogContent>
+                </Dialog>
                 <TextInputWithIcon 
                 onChangeText={(password) => this.setState({password})}
                 icon="ios-lock" 
@@ -48,9 +152,32 @@ export default class LoginForm extends Component {
                 textcontenttype="password" 
                 keyboardtype="default" 
                 securetextentry={true}
-                error={false}
+                error={this.state.errorPassword}
                 validated={false}
                 />
+                <Dialog
+                dialogTitle={<DialogTitle title="Error in Password!" />}
+                visible={this.state.errorPassVisible}
+                onTouchOutside={() => {
+                this.setState({ errorPassVisible: false })
+                }}
+                footer={
+                    <DialogFooter>
+                      <DialogButton
+                        text="CANCEL"
+                        onPress={() => {this.setState({ errorPassVisible: false })}}
+                      />
+                      <DialogButton
+                        text="OK"
+                        onPress={() => {this.setState({ errorPassVisible: false })}}
+                      />
+                    </DialogFooter>
+                  }
+                >    
+                <DialogContent>
+                <Text style={{marginTop: 10}}>The password you used was wrong.    </Text>
+                </DialogContent>
+                </Dialog>
                 <Button
                 buttonStyle={styles.loginButton}
                 onPress={() => this.onLoginPress()}

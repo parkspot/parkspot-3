@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, ScrollView, KeyboardAvoidingView } from 'react-native'
+import { View, StyleSheet, ScrollView, KeyboardAvoidingView,AsyncStorage } from 'react-native'
 
 import Searchbar from '../components/Searchbar'
 import Card from '../components/Card'
@@ -26,6 +26,33 @@ class HomeScreen extends Component {
     showPreferences = () => {
         this.refs.prefElement.showPrefPanel()
     }
+
+    async _removeItemValue(key) {
+        try {
+          await AsyncStorage.removeItem(key);
+          return true;
+        }
+        catch(exception) {
+          return false;
+        }
+      }
+
+      async _retrieveDataFromAsyncStorage(key) {
+        try {
+          const value = await AsyncStorage.getItem(key);
+          if (value !== null) {
+            // We have data!!
+            console.log(value);
+            return true
+          } else {
+              return false
+              console.log('no value')
+          }
+        } catch (error) {
+          // Error retrieving data
+          console.error(error)
+        }
+      }
 
     render() {
         return (
