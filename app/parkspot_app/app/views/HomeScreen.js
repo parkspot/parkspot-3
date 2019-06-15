@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, ScrollView, KeyboardAvoidingView } from 'react-native'
+import { View, StyleSheet, ScrollView, KeyboardAvoidingView, Dimensions } from 'react-native'
 
 import Searchbar from '../components/Searchbar'
 import Card from '../components/Card'
@@ -7,7 +7,7 @@ import Map from '../components/Map'
 import Favorites from '../components/Favorites'
 import Preferences from '../components/Preferences'
 
-
+const { width } = Dimensions.get('window');
 
 class HomeScreen extends Component {
     constructor(props) {
@@ -27,12 +27,22 @@ class HomeScreen extends Component {
         this.refs.prefElement.showPrefPanel()
     }
 
+    componentDidMount() {
+		setTimeout(() => {this.scrollView.scrollTo({x: -10}) }, 1) // scroll view position fix
+	}
+
     render() {
         return (
             <View style={styles.container}>
                 <Map />
                 <KeyboardAvoidingView style={styles.cardContainer} behavior="padding" enabled keyboardVerticalOffset={70}>
-                    <ScrollView horizontal={true} style={{display: this.state.cardDisplay}}>
+                    <ScrollView ref={(scrollView) => { this.scrollView = scrollView; }} horizontal={true} decelerationRate={0} snapToInterval={width - 20} snapToAlignment={"center"} showsHorizontalScrollIndicator={false}
+                    contentInset={{
+                        top: 0,
+                        left: 10,
+                        bottom: 0,
+                        right: 10,
+                    }} style={{display: this.state.cardDisplay}}>
                         <Card
                             parkingName={"Parking Savaanstraat (P4)"}
                             address={"Savaanstraat 13, 9000 Gent"}
@@ -50,6 +60,30 @@ class HomeScreen extends Component {
                             chance={"34% chance"}
                             />
                         <Card 
+                            parkingName={"Parking Vrijdagmarkt (P1)"}
+                            address={"Vrijdagmarkt 1, 9000 Gent"}
+                            price={"€2,00/started hour"}
+                            type={"Underground"}
+                            openWhen={"24/7"}
+                            chance={"97% chance"}
+                            />
+                            <Card 
+                            parkingName={"Parking Vrijdagmarkt (P1)"}
+                            address={"Vrijdagmarkt 1, 9000 Gent"}
+                            price={"€2,00/started hour"}
+                            type={"Underground"}
+                            openWhen={"24/7"}
+                            chance={"97% chance"}
+                            />
+                            <Card 
+                            parkingName={"Parking Vrijdagmarkt (P1)"}
+                            address={"Vrijdagmarkt 1, 9000 Gent"}
+                            price={"€2,00/started hour"}
+                            type={"Underground"}
+                            openWhen={"24/7"}
+                            chance={"97% chance"}
+                            />
+                            <Card 
                             parkingName={"Parking Vrijdagmarkt (P1)"}
                             address={"Vrijdagmarkt 1, 9000 Gent"}
                             price={"€2,00/started hour"}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, TouchableOpacity, Image, Alert, Linking } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity, Image, Alert, Linking, Dimensions } from 'react-native'
 import { Notifications } from 'expo'
 
 import AppLink from 'react-native-app-link';
@@ -14,6 +14,8 @@ const cancelNotification = async () => {
     console.log(error)
   }
 }
+
+const { width } = Dimensions.get('window');
 
 class Card extends Component {
 
@@ -96,8 +98,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     flexGrow: 1,
     flexShrink: 0,
-    marginLeft: 10,
-    marginRight: 10,
     backgroundColor: "white",
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.09,
@@ -105,7 +105,7 @@ const styles = StyleSheet.create({
     elevation: 1,
   },
   cardStyle: {
-    width: 374,
+    width: width - 40,
     height: 264,
     borderRadius: 10,
     flex: 1,
