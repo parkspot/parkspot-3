@@ -1,0 +1,117 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+
+    overflow-x: hidden;
+}
+
+
+.fullscreen {
+    height: 100vh;
+    width: 100vw;
+    position: relative;
+    scroll-snap-type: y proximity;
+}
+
+.slogan {
+    color: #35d171;
+    text-align: right;
+    font-size: 80px;
+    font-family: 'Anton', sans-serif;
+}
+
+.setting {
+
+    scroll-snap-align: initial;
+}
+
+.title {
+    color: #414141;
+    text-align: right;
+    position: absolute;
+    right: 10%;
+    top: 10%;
+    font-size: 140px;
+    font-family: 'Anton', sans-serif;
+    display: flex;
+    justify-content: flex-end;
+    max-width: 30%;
+    flex-wrap: wrap;
+}
+
+
+
+.front__image {
+    position: absolute;
+    left: 15%;
+
+    width: 30%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.store {
+    position: absolute;
+    right: 10%;
+    top: 60%;
+    max-width: 20%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    flex-wrap: wrap;
+
+}
+
+
+.store img {
+    max-width: 60%;
+}
+
+.store .head {
+    color: #414141;
+    text-align: right;
+    font-size: 54px;
+    font-family: 'Anton', sans-serif;
+}
+
+
+.front__image img {
+
+    max-width: 65%;
+
+}
+
+.sub__title {
+    color: #414141;
+    text-align: right;
+
+    font-size: 100px;
+    font-family: 'Anton', sans-serif;
+}
+
+.text {
+    color: #414141;
+    text-align: right;
+    font-size: 35px;
+    font-family: 'Anton', sans-serif;
+    max-width: 80%;
+}
+
+.background__left {
+    position: absolute;
+    left: 0;
+    width: 30%;
+    height: 100%;
+    background-image: linear-gradient(to right, #11998e, #37df77);
+}
+
+.background__right {
+    position: absolute;
+    right: 0;
+    width: 70%;
+    height: 100%;
+    background-color: #f4f4f4;
+}

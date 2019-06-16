@@ -30,7 +30,7 @@ class HomeOverlay extends Component {
                 height="40%"
                 onBackdropPress={() => this.setState({ isVisible: false })}
             >
-                <Image style={styles.image} source={require("../assets/images/overlay.png")} />
+                <Image style={styles.image} source={require("../assets/images/overlay.jpg")} />
             </Overlay>
 
         );

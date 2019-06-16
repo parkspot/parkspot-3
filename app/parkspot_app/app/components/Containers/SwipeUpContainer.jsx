@@ -1,43 +1,58 @@
+//React imports
 import React, { Component } from 'react'
-import { View, StyleSheet, Button, ScrollView, Text, Animated } from 'react-native'
-import Searchbar from '../Searchbar'
+import { View, StyleSheet, Button } from 'react-native'
 
+//Local imports
 import SlidingUpPanel from 'rn-sliding-up-panel';
-import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
 import { Title } from '../Texts/'
+
+/**
+ * @class SwipeUpContainer
+ * Styling and functionality for a swipe up panel
+ */
 class SwipeUpContainer extends Component {
 
+    /**
+     * @constructor
+     * @param {Object} props 
+     */
     constructor(props) {
         super(props)
     }
 
-
+    /**
+     * @function ClosePanel
+     * Asynchronous function to hide the swipe up panel
+     */
     ClosePanel = async () => {
         this._panel.hide()
     }
 
+    /**
+     * @function ShowPanel
+     * Asynchronous function to show the swipe up panel
+     */
     ShowPanel = async () => {
         this._panel.show()
     }
 
+    /**
+     * @function render
+     * @returns View of the swipe up panel
+     */
     render() {
-        const config = {
-            velocityThreshold: 0.3,
-            directionalOffsetThreshold: 80
-        };
 
         return (
             <View style={styles.container}>
                 {/*<Button title='Show Settings' onPress={() => this._panel.show()} />*/}
-                <SlidingUpPanel ref={c => this._panel = c} friction={1.50} minimumVelocityThreshold={0.1} snappingPoints={[0, 80]}>
+                <SlidingUpPanel ref={c => this._panel = c} friction={0.60} minimumVelocityThreshold={0.1} snappingPoints={[0, 80]}>
                     <View style={[{ height: this.props.height }, styles.container_panel]}>
-                        <GestureRecognizer style={styles.swipeContainer} config={config} onSwipeDown={() => this.ClosePanel()}>
-                            <View style={styles.container_preference}>
-                                {this.props.children}
-                                <Title text={this.props.titleText} />
-                                <Button title='Hide' onPress={() => { this.ClosePanel() }} />
-                            </View>
-                        </GestureRecognizer>
+                        <View style={styles.container_preference}>
+                            <View style={styles.dropDownElement}/>
+                            <Title text={this.props.titleText} />
+                            {/*<Button title='Hide' onPress={() => { this.ClosePanel() }} />*/}
+                            {this.props.children}
+                        </View>
                     </View>
                 </SlidingUpPanel>
             </View >
@@ -45,11 +60,16 @@ class SwipeUpContainer extends Component {
     }
 }
 
-
+/**
+ * @type {StyleSheet}
+ * Declaration of all the styles needed to style the swipe up panel
+ */
 const styles = StyleSheet.create({
     swipeContainer: {
         width: "100%",
         height: "100%",
+        backgroundColor: 'red',
+
     },
     container: {
         backgroundColor: 'white',
@@ -59,8 +79,6 @@ const styles = StyleSheet.create({
         height: '0%',
     },
     container_panel: {
-        alignItems: 'center',
-        justifyContent: 'center',
         width: '100%',
         position: 'absolute',
         bottom: 0,
@@ -71,30 +89,25 @@ const styles = StyleSheet.create({
         borderRadius: 20,
         height: '100%',
         backgroundColor: 'white',
-        alignItems: 'center',
-        justifyContent: 'center',
         width: '100%',
         marginTop: 10,
-
-
+        shadowColor: "#000",
+        shadowOffset: {
+          width: 0,
+          height: 3,
+        },
+        shadowOpacity: 0.09,
+        shadowRadius: 4.65,
+        elevation: 1,
     },
-
-    map: {
-        ...StyleSheet.absoluteFillObject,
-    },
-    buttonContainer: {
-        marginBottom: 20,
-        justifyContent: 'center',
-        alignItems: 'center',
-
-    },
-    cardContainer: {
-        maxHeight: '70%',
-        flex: 1,
-        flexDirection: 'row',
-        flexWrap: 'nowrap',
-        alignItems: 'flex-end',
-        marginBottom: 10,
-    },
+    dropDownElement: {
+        width:"13%",
+        height: 7,
+        alignSelf: "center",
+        marginTop: 7,
+        borderRadius: 20,
+        backgroundColor: '#000',
+        opacity: 0.2
+    }
 });
 export default SwipeUpContainer
