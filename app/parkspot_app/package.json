@@ -14,11 +14,7 @@
         "react": "16.5.0",
         "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
         "react-native-app-link": "^1.0.0",
-<<<<<<< HEAD
-        "react-native-config": "^0.11.7",
-=======
         "react-native-dotenv": "^0.2.0",
->>>>>>> 2086e1beedf56aea772c7240cf74e5028ca27835
         "react-native-dropdown": "0.0.6",
         "react-native-elements": "^1.1.0",
         "react-native-extended-stylesheet": "^0.11.2",
