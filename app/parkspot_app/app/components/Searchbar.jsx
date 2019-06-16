@@ -7,6 +7,17 @@ import { Text, View, StyleSheet, TextInput } from 'react-native';
  * Styling of the searchbar
  */
 class Searchbar extends Component {
+  constructor(props) {
+    super(props);
+    this.submitHandler = this.submitHandler.bind(this);
+    this.state = {
+      text: '',
+    };
+  }
+
+  submitHandler = () => {
+    this.props.submitHandler(this.state.text)
+  }
 
   /**
    * @function render
@@ -19,7 +30,8 @@ class Searchbar extends Component {
       <TextInput
         style={styles.inputField}
         placeholder={placeholder}
-        onSubmitEditing={this.props.submitHandler}
+        onChangeText={(text) => this.setState({text})}
+        onSubmitEditing={this.submitHandler}
       />
     );
   }

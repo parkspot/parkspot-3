@@ -80,7 +80,7 @@ export default class RegisterForm extends Component {
           }
         })
         .then(res => res.json())
-        .then(response => console.log('Success:', JSON.stringify(response)))
+        .then(response => console.log('Success:'))
         .catch(error => console.error('Error:', error))
     }
 
@@ -105,10 +105,11 @@ export default class RegisterForm extends Component {
         })
         .then(res => res.json())
         .then(response => {
-            console.log('Success:', JSON.stringify(response))
+            console.log('Success:')
             console.log('Token:', response.token)
             this._postDataToAsyncStorage('userToken', response.token)
             this._postDataToAsyncStorage('email', response.email)
+            this._postDataToAsyncStorage('email', response.userId)
         })
         .catch(error => console.error('Error:', error))
     }

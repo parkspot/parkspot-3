@@ -30,6 +30,7 @@ export default class LogOutButton extends Component {
     async _onPress() {
         await this._removeItemValue('userToken')
         await this._removeItemValue('email')
+        this._removeItemValue('userId')
         Actions.login()
     }
 
