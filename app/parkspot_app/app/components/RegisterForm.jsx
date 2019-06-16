@@ -80,7 +80,6 @@ export default class RegisterForm extends Component {
           }
         })
         .then(res => res.json())
-        .then(response => console.log('Success:'))
         .catch(error => console.error('Error:', error))
     }
 
@@ -105,11 +104,9 @@ export default class RegisterForm extends Component {
         })
         .then(res => res.json())
         .then(response => {
-            console.log('Success:')
-            console.log('Token:', response.token)
             this._postDataToAsyncStorage('userToken', response.token)
             this._postDataToAsyncStorage('email', response.email)
-            this._postDataToAsyncStorage('email', response.userId)
+            this._postDataToAsyncStorage('userId', response.userId)
         })
         .catch(error => console.error('Error:', error))
     }
@@ -174,26 +171,6 @@ export default class RegisterForm extends Component {
             console.error(error)
         }
     }
-
-    /**
-     * @function _retrieveDataFromAsyncStorage
-     * @param {String} key 
-     * Will check if there is a key in the AsyncStorage
-     */
-    async _retrieveDataFromAsyncStorage(key) {
-        try {
-          const value = await AsyncStorage.getItem(key)
-          if (value !== null) {
-            // We have data!!
-            console.log(value);
-          } else {
-              console.log('no value')
-          }
-        } catch (error) {
-          // Error retrieving data
-          console.error(error)
-        }
-      }
 
       /**
        * @function render

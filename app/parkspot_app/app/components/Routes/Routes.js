@@ -46,7 +46,6 @@ export default class Routes extends Component {
           const value = await AsyncStorage.getItem(key);
           if (value !== null) {
 			// We have data!!
-			console.log(value)
             return this.setState({loggedIn: true})
           } else {
 			  console.log('no value')

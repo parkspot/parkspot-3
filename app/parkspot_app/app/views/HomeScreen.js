@@ -16,8 +16,11 @@ class HomeScreen extends Component {
         super(props);
         this.mapElement = React.createRef();
         this.state = {
+            userId: "",
             cardDisplay: "none",
+            destinationAddress: "",
             destination: {},
+            parkings: {}
         }
     }
     getResultsFromAPI = async(zone, price, distance, bancontact, lez, underground) => {
@@ -28,7 +31,7 @@ class HomeScreen extends Component {
                 "long": this.state.destination.lng,
                 "lat": this.state.destination.lat
                 },
-            "userEmail": this._retrieveDataFromAsyncStorage("userId"),
+            "userId": this.state.userId,
             "settings": {
                 "zonename": zone,
                 "price_per_hour" : price,
@@ -40,14 +43,16 @@ class HomeScreen extends Component {
         }
         
         await fetch(url, {
-          method: 'GET', // or 'PUT'
+          method: 'POST', // or 'PUT'
           body: JSON.stringify(data), // data can be `string` or {object}!
           headers:{
             'Content-Type': 'application/json'
           }
         })
         .then(res => res.json())
-        .then(response => console.log('Success:', JSON.stringify(response)))
+        .then(async(response) => await this.setState({
+            parkings: response
+        }))
         .catch(error => console.error('Error:', error))
     }
 
@@ -56,14 +61,15 @@ class HomeScreen extends Component {
         .then(response => response.json())
         .then((responseJson)=> {
           this.setState({
+            destinationAddress: destinationAddress,
             destination: responseJson["results"][0]["geometry"]
           })
         })
         .catch(error=>console.log(error)) //to catch the errors if any
     }
 
-    showCards = (zone, price, distance, bancontact, lez, underground) => {
-        this.getResultsFromAPI(zone, price, distance, bancontact, lez, underground)
+    showCards = async(zone, price, distance, bancontact, lez, underground) => {
+        await this.getResultsFromAPI(zone, price, distance, bancontact, lez, underground)
         this.setState({cardDisplay: "flex"})
     }
 
@@ -91,9 +97,9 @@ class HomeScreen extends Component {
         try {
             const value = await AsyncStorage.getItem(key);
             if (value !== null) {
-            // We have data!!
-            console.log(value);
-            return true
+            return this.setState({
+                userId: value
+            })
           } else {
               return false
           }
@@ -104,11 +110,15 @@ class HomeScreen extends Component {
     }
 
     componentDidMount() {
-		setTimeout(() => {this.scrollView.scrollTo({x: -10}) }, 1) // scroll view position fix
-	}
+        setTimeout(() => {this.scrollView.scrollTo({x: -10}) }, 1) // scroll view position fix
+        
+    }
+
+    componentWillMount() {
+        this._retrieveDataFromAsyncStorage("userId")
+    }
 
     render() {
-        this._removeItemValue("userToken") 
         return (
             <View style={styles.container}>
                 <LogOutButton />
@@ -121,66 +131,20 @@ class HomeScreen extends Component {
                         bottom: 0,
                         right: 10,
                     }} style={{display: this.state.cardDisplay}}>
-                        <Card
+
+                        {Array.from(this.state.parkings).map(parking => (
+                            <Card
+                            key={parking.id}
                             onClick={this.showMarkers}
-                            destination={"sassevaartstraat 46, Gent"}
-                            parkingName={"Parking Savaanstraat (P4)"}
-                            address={"Savaanstraat 13, 9000 Gent"}
-                            price={"€2,50/started hour"}
-                            type={"Underground"}
+                            destination={this.state.destinationAddress}
+                            parkingName={parking.id}
+                            address={parking.address}
+                            price={parking.properties.tarief.day}
+                            type={parking.type}
                             openWhen={"24/7"}
-                            chance={"86% chance"}
+                            chance={parking.kans}
                             />
-                        <Card 
-                            onClick={this.showMarkers}
-                            destination={"sassevaartstraat 46, Gent"}
-                            parkingName={"Interparking Gent Zuid"}
-                            address={"Franklin Rooseveltlaan 3/A, 9000 Gent"}
-                            price={"€3,00/started hour"}
-                            type={"Underground"}
-                            openWhen={"24/7"}
-                            chance={"34% chance"}
-                            />
-                        <Card 
-                            onClick={this.showMarkers}
-                            destination={"sassevaartstraat 46, Gent"}
-                            parkingName={"Parking Vrijdagmarkt (P1)"}
-                            address={"Vrijdagmarkt 1, 9000 Gent"}
-                            price={"€2,00/started hour"}
-                            type={"Underground"}
-                            openWhen={"24/7"}
-                            chance={"97% chance"}
-                            />
-                            <Card 
-                            onClick={this.showMarkers}
-                            destination={"sassevaartstraat 46, Gent"}
-                            parkingName={"Parking Vrijdagmarkt (P1)"}
-                            address={"Vrijdagmarkt 1, 9000 Gent"}
-                            price={"€2,00/started hour"}
-                            type={"Underground"}
-                            openWhen={"24/7"}
-                            chance={"97% chance"}
-                            />
-                            <Card 
-                            onClick={this.showMarkers}
-                            destination={"sassevaartstraat 46, Gent"}
-                            parkingName={"Parking Vrijdagmarkt (P1)"}
-                            address={"Vrijdagmarkt 1, 9000 Gent"}
-                            price={"€2,00/started hour"}
-                            type={"Underground"}
-                            openWhen={"24/7"}
-                            chance={"97% chance"}
-                            />
-                            <Card 
-                            onClick={this.showMarkers}
-                            destination={"sassevaartstraat 46, Gent"}
-                            parkingName={"Parking Vrijdagmarkt (P1)"}
-                            address={"Vrijdagmarkt 1, 9000 Gent"}
-                            price={"€2,00/started hour"}
-                            type={"Underground"}
-                            openWhen={"24/7"}
-                            chance={"97% chance"}
-                            />
+                        ))}
 
                     </ScrollView>
                 </KeyboardAvoidingView>

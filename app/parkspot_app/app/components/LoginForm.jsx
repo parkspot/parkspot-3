@@ -78,14 +78,11 @@ export default class LoginForm extends Component {
         })
         .then(res => res.json())
         .then(response => {
-            console.log('Success:', JSON.stringify(response))
-            console.log('Token:', response.token)
             this._postDataToAsyncStorage('userToken', response.token)
             this._postDataToAsyncStorage('email', response.email)
-            this._postDataToAsyncStorage('email', response.userId)
+            this._postDataToAsyncStorage('userId', response.userId)
         })
         .catch(error => {
-            console.log('Error:', error)
             this.setState({errorPassVisible: true})
 
         })
@@ -115,7 +112,6 @@ export default class LoginForm extends Component {
           const value = await AsyncStorage.getItem(key)
           if (value !== null) {
             // We have data!!
-            console.log(value);
           } else {
               console.log('no value')
           }

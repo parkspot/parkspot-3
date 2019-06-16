@@ -85,7 +85,7 @@ class Preferences extends Component {
                                     items={this.state.priceOptions}
                                     labelPosition="top"
                                     defaultItem={0}
-                                    onSlidingComplete={(value) => this.setState({ price: value })}/>
+                                    onSlidingComplete={(value) => this.setState({ price: this.state.priceOptions[value].value })}/>
                             </View>
                         </View>
 
@@ -98,7 +98,7 @@ class Preferences extends Component {
                                     items={this.state.distanceOptions}
                                     labelPosition="top"
                                     defaultItem={0}
-                                    onSlidingComplete={(value) => this.setState({ distance: value })}/>
+                                    onSlidingComplete={(value) => this.setState({ distance: this.state.distanceOptions[value].value})}/>
                             </View>
                         </View>
 
