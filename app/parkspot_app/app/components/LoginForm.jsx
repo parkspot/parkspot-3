@@ -24,7 +24,7 @@ export default class LoginForm extends Component {
     async checkEmailInDatabase() {
         let {email} = this.state
         this.setState({EmailInUse: false})
-        const url = "http://192.168.1.5:8080/api/v1/users"
+        const url = "http://192.168.5.136:8080/api/v1/users"
         await fetch(url)
         .then(response => 
             response.json()
@@ -41,7 +41,7 @@ export default class LoginForm extends Component {
     }
 
     async postUserToAuthentication(){
-        const url = "http://192.168.1.5:8080/api/v1/login/local"
+        const url = "http://192.168.5.136:8080/api/v1/login/local"
         var data = {
             email: this.state.email,
             password: this.state.password

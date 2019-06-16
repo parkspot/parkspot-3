@@ -28,7 +28,7 @@ export default class RegisterForm extends Component {
     async checkEmailInDatabase() {
         let {email} = this.state
         this.setState({errorEmailInUse: false})
-        const url = "http://192.168.1.5:8080/api/v1/users"
+        const url = "http://192.168.5.136:8080/api/v1/users"
         await fetch(url)
         .then(response => 
             response.json()
@@ -47,7 +47,7 @@ export default class RegisterForm extends Component {
     }
 
     async postUserToDatabase() {
-        const url = "http://192.168.1.5:8080/api/v1/users"
+        const url = "http://192.168.5.136:8080/api/v1/users"
         var data = {
             email: this.state.email,
             password: this.state.password
@@ -61,12 +61,12 @@ export default class RegisterForm extends Component {
           }
         })
         .then(res => res.json())
-        .then(response => console.log('Success:', JSON.stringify(response)))
+        .then(response => console.log('Success:'))
         .catch(error => console.error('Error:', error))
     }
 
     async postUserToAuthentication(){
-        const url = "http://192.168.1.5:8080/api/v1/login/local"
+        const url = "http://192.168.5.136:8080/api/v1/login/local"
         var data = {
             email: this.state.email,
             password: this.state.password
@@ -81,7 +81,7 @@ export default class RegisterForm extends Component {
         })
         .then(res => res.json())
         .then(response => {
-            console.log('Success:', JSON.stringify(response))
+            console.log('Success:')
             console.log('Token:', response.token)
             this._postDataToAsyncStorage('userToken', response.token)
         })

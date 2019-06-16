@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, TouchableOpacity, Image, Alert, Linking } from 'react-native'
+import { Text, View, StyleSheet, TouchableOpacity, Image, Alert, Linking, Dimensions } from 'react-native'
 import { Notifications } from 'expo'
 
 import AppLink from 'react-native-app-link';
@@ -15,10 +15,24 @@ const cancelNotification = async () => {
   }
 }
 
+const { width } = Dimensions.get('window');
+
 class Card extends Component {
 
   constructor(props) {
     super(props);
+    this.callParentfunction = this.callParentfunction.bind(this);
+    this.state = {
+      destinationAdress: "",
+      parkingAddress: "",
+    }
+  }
+
+  componentDidMount() {
+    this.setState({
+      destinationAdress: this.props.destination,
+      parkingAddress: this.props.address
+    })
   }
 
   openWaze = () => {
@@ -32,10 +46,14 @@ class Card extends Component {
     }
   }
 
+  callParentfunction() {
+    this.props.onClick(this.props.destination, this.props.address)
+  }
+
   render() {
 
   return (
-  <TouchableOpacity style={styles.cardStyle} >
+  <TouchableOpacity style={styles.cardStyle} onPress={this.callParentfunction}>
     <View style={styles.card} >
       <View style={styles.view}>
       <View style={{flexDirection: "row", width: "100%", justifyContent: "space-between"}}>
@@ -96,8 +114,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     flexGrow: 1,
     flexShrink: 0,
-    marginLeft: 10,
-    marginRight: 10,
     backgroundColor: "white",
     shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.09,
@@ -105,7 +121,7 @@ const styles = StyleSheet.create({
     elevation: 1,
   },
   cardStyle: {
-    width: 374,
+    width: width - 40,
     height: 264,
     borderRadius: 10,
     flex: 1,

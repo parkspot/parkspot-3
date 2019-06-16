@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, ScrollView, KeyboardAvoidingView,AsyncStorage } from 'react-native'
+import { View, StyleSheet, ScrollView, KeyboardAvoidingView,AsyncStorage, Dimensions } from 'react-native'
 
 import Searchbar from '../components/Searchbar'
 import Card from '../components/Card'
@@ -7,24 +7,72 @@ import Map from '../components/Map'
 import Favorites from '../components/Favorites'
 import Preferences from '../components/Preferences'
 
-
+const { width } = Dimensions.get('window');
 
 class HomeScreen extends Component {
     constructor(props) {
         super(props);
+        this.mapElement = React.createRef();
         this.state = {
             cardDisplay: "none",
-            prefDisplay: "none",
-            favsDisplay: "flex",
+            destination: {},
         }
     }
+    getResultsFromAPI = async(zone, price, distance, bancontact, lez, underground) => {
+        const url = "http://192.168.5.136:8080/api/v1/searchparkingspots"
 
-    showCards = () => {
+        var data = {
+            "destinationGeo": {
+                "long": this.state.destination.lng,
+                "lat": this.state.destination.lat
+                },
+            "userEmail": "lol",
+            "settings": {
+                "zonename": zone,
+                "price_per_hour" : price,
+                "distance_from_destination" : distance,
+                "bankcontact" : bancontact,
+                "low_emission_zone" : lez,
+                "underground" : underground
+                }
+        }
+        
+        await fetch(url, {
+          method: 'POST', // or 'PUT'
+          body: JSON.stringify(data), // data can be `string` or {object}!
+          headers:{
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(res => res.json())
+        .then(response => console.log('Success:', JSON.stringify(response)))
+        .catch(error => console.error('Error:', error))
+    }
+
+    getDestCoordinates(destinationAddress){
+        fetch("https://api.opencagedata.com/geocode/v1/json?q=" + destinationAddress + "&key=4fd9b61b904e466b8256aa5b4c04cb7b")
+        .then(response => response.json())
+        .then((responseJson)=> {
+          this.setState({
+            destination: responseJson["results"][0]["geometry"]
+          })
+        })
+        .catch(error=>console.log(error)) //to catch the errors if any
+    }
+
+    showCards = (zone, price, distance, bancontact, lez, underground) => {
+        //this.getResultsFromAPI(zone, price, distance, bancontact, lez, underground)
         this.setState({cardDisplay: "flex"})
     }
 
-    showPreferences = () => {
+    showPreferences = (destinationAddress) => {
+        this.getDestCoordinates(destinationAddress)
         this.refs.prefElement.showPrefPanel()
+    }
+
+    showMarkers = async(destinationAddress, parkingAddress) => {
+        await this.mapElement.current
+        this.mapElement.current.updateMarkers(destinationAddress, parkingAddress)
     }
 
     async _removeItemValue(key) {
@@ -35,32 +83,45 @@ class HomeScreen extends Component {
         catch(exception) {
           return false;
         }
-      }
+    }
 
-      async _retrieveDataFromAsyncStorage(key) {
+    async _retrieveDataFromAsyncStorage(key) {
         try {
-          const value = await AsyncStorage.getItem(key);
-          if (value !== null) {
+            const value = await AsyncStorage.getItem(key);
+            if (value !== null) {
             // We have data!!
             console.log(value);
             return true
-          } else {
-              return false
-              console.log('no value')
-          }
+            } else {
+                return false
+                console.log('no value')
+            }
         } catch (error) {
-          // Error retrieving data
-          console.error(error)
+            // Error retrieving data
+            console.error(error)
         }
-      }
+    }
+
+    componentDidMount() {
+		setTimeout(() => {this.scrollView.scrollTo({x: -10}) }, 1) // scroll view position fix
+	}
 
     render() {
+        this._removeItemValue("userToken") 
         return (
             <View style={styles.container}>
-                <Map />
+                <Map  ref={this.mapElement}/>
                 <KeyboardAvoidingView style={styles.cardContainer} behavior="padding" enabled keyboardVerticalOffset={70}>
-                    <ScrollView horizontal={true} style={{display: this.state.cardDisplay}}>
+                    <ScrollView ref={(scrollView) => { this.scrollView = scrollView; }} horizontal={true} decelerationRate={0} snapToInterval={width - 20} snapToAlignment={"center"} showsHorizontalScrollIndicator={false}
+                    contentInset={{
+                        top: 0,
+                        left: 10,
+                        bottom: 0,
+                        right: 10,
+                    }} style={{display: this.state.cardDisplay}}>
                         <Card
+                            onClick={this.showMarkers}
+                            destination={"sassevaartstraat 46, Gent"}
                             parkingName={"Parking Savaanstraat (P4)"}
                             address={"Savaanstraat 13, 9000 Gent"}
                             price={"€2,50/started hour"}
@@ -69,6 +130,8 @@ class HomeScreen extends Component {
                             chance={"86% chance"}
                             />
                         <Card 
+                            onClick={this.showMarkers}
+                            destination={"sassevaartstraat 46, Gent"}
                             parkingName={"Interparking Gent Zuid"}
                             address={"Franklin Rooseveltlaan 3/A, 9000 Gent"}
                             price={"€3,00/started hour"}
@@ -77,6 +140,38 @@ class HomeScreen extends Component {
                             chance={"34% chance"}
                             />
                         <Card 
+                            onClick={this.showMarkers}
+                            destination={"sassevaartstraat 46, Gent"}
+                            parkingName={"Parking Vrijdagmarkt (P1)"}
+                            address={"Vrijdagmarkt 1, 9000 Gent"}
+                            price={"€2,00/started hour"}
+                            type={"Underground"}
+                            openWhen={"24/7"}
+                            chance={"97% chance"}
+                            />
+                            <Card 
+                            onClick={this.showMarkers}
+                            destination={"sassevaartstraat 46, Gent"}
+                            parkingName={"Parking Vrijdagmarkt (P1)"}
+                            address={"Vrijdagmarkt 1, 9000 Gent"}
+                            price={"€2,00/started hour"}
+                            type={"Underground"}
+                            openWhen={"24/7"}
+                            chance={"97% chance"}
+                            />
+                            <Card 
+                            onClick={this.showMarkers}
+                            destination={"sassevaartstraat 46, Gent"}
+                            parkingName={"Parking Vrijdagmarkt (P1)"}
+                            address={"Vrijdagmarkt 1, 9000 Gent"}
+                            price={"€2,00/started hour"}
+                            type={"Underground"}
+                            openWhen={"24/7"}
+                            chance={"97% chance"}
+                            />
+                            <Card 
+                            onClick={this.showMarkers}
+                            destination={"sassevaartstraat 46, Gent"}
                             parkingName={"Parking Vrijdagmarkt (P1)"}
                             address={"Vrijdagmarkt 1, 9000 Gent"}
                             price={"€2,00/started hour"}

@@ -11,9 +11,10 @@ import RectangleButton from './Buttons/RectangleButton';
 class Preferences extends Component {
     constructor(props) {
         super(props);
+        this.searchHandler = this.searchHandler.bind(this);
         this.prefElement = React.createRef();
         this.state = {
-            zone : "Underground Parking",
+            zone : "City",
             price : "0",
             distance: "0",
             distanceOptions: [
@@ -36,7 +37,7 @@ class Preferences extends Component {
 
     _onPressButton = () => {
         QuickPicker.open({ 
-            items: ['Underground parking', 'Park & Ride', 'City', 'Edge of city', 'Outside city'],
+            items: ['City', 'Edge of city', 'Outside city', 'Park & Ride'],
             selectedValue: this.state.zone, // this could be this.state.selectedLetter as well.
             onValueChange: (selectedValueFromPicker) => this.setState({ zone: selectedValueFromPicker }),
         });
@@ -47,7 +48,7 @@ class Preferences extends Component {
     }
 
     searchHandler = () => {
-        this.props.searchHandler()
+        this.props.searchHandler(this.state.zone, this.state.price, this.state.distance, this.state.bancontact, this.state.avoidLez, this.state.avoidUnderground)
         this.prefElement.current.ClosePanel()
     }
 
