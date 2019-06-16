@@ -1,12 +1,24 @@
+//React imports
 import React, { Component } from 'react'
 import { View, Text, Image, StyleSheet,TouchableOpacity, AsyncStorage} from 'react-native'
 import { Button } from 'react-native-elements'
-import TextInputWithIcon from '../components/TextInputWithIcon'
 import { Actions } from 'react-native-router-flux'
 import Dialog, { DialogContent, DialogFooter,DialogButton, DialogTitle } from 'react-native-popup-dialog'
+import { HOSTNAME, PORT } from 'react-native-dotenv'
 
+//Local imports
+import TextInputWithIcon from '../components/TextInputWithIcon'
+
+/**
+ * @class LoginForm
+ * Styling of the log in form with functionality
+ */
 export default class LoginForm extends Component {
 
+    /**
+     * @constructor
+     * @param {Object} props 
+     */
     constructor(props){
         super(props)
         this.state = {
@@ -21,10 +33,15 @@ export default class LoginForm extends Component {
         }
     }
 
+    /**
+     * @function checkEmailInDatabase
+     * Asynchronous function to check if the data passed on from the user is already in the database
+     * If the data matches from 1 in the database set state of EmailInUse
+     */
     async checkEmailInDatabase() {
         let {email} = this.state
         this.setState({EmailInUse: false})
-        const url = "http://192.168.5.136:8080/api/v1/users"
+        const url = `http://${HOSTNAME}:${PORT}/api/v1/users`
         await fetch(url)
         .then(response => 
             response.json()
@@ -40,8 +57,13 @@ export default class LoginForm extends Component {
         })
     }
 
+    /**
+     * @function postUserToAuthentication
+     * Asynchronous function to post the user to the authentication in the database
+     * If the post request was succesfull store the value in the AsyncStorage with the response token from the API
+     */
     async postUserToAuthentication(){
-        const url = "http://192.168.5.136:8080/api/v1/login/local"
+        const url = `http://${HOSTNAME}:${PORT}/api/v1/login/local`
         var data = {
             email: this.state.email,
             password: this.state.password
@@ -59,6 +81,7 @@ export default class LoginForm extends Component {
             console.log('Success:', JSON.stringify(response))
             console.log('Token:', response.token)
             this._postDataToAsyncStorage('userToken', response.token)
+            this._postDataToAsyncStorage('email', response.email)
         })
         .catch(error => {
             console.log('Error:', error)
@@ -67,17 +90,28 @@ export default class LoginForm extends Component {
         })
     }
 
+    /**
+     * @function _postDataToAsyncStorage
+     * @param {String} key 
+     * @param {String} value 
+     * Posts a key with a certain value to the AsyuncStorage
+     */
     async _postDataToAsyncStorage (key, value) {
         try {
-            await AsyncStorage.setItem(key, value);
+            await AsyncStorage.setItem(key, value)
         } catch (error) {
             console.error(error)
         }
     }
 
+    /**
+     * @function _retrieveDataFromAsyncStorage
+     * @param {String} key 
+     * Will check if there is a key in the AsyncStorage
+     */
     async _retrieveDataFromAsyncStorage(key) {
         try {
-          const value = await AsyncStorage.getItem(key);
+          const value = await AsyncStorage.getItem(key)
           if (value !== null) {
             // We have data!!
             console.log(value);
@@ -90,10 +124,16 @@ export default class LoginForm extends Component {
         }
       }
 
+    /**
+     * @function
+     * Asynchronous function that handles the button press to log in
+     */
     async onLoginPress() {
+        //First check if there is an email that is in the database with the user input
         await this.checkEmailInDatabase()
         if(this.state.EmailInUse){
             this.setState({errorEmail: false})
+            //Post user to authentication
             await this.postUserToAuthentication()
             if (this._retrieveDataFromAsyncStorage('userToken')){
                 Actions.home()
@@ -103,6 +143,10 @@ export default class LoginForm extends Component {
         }
     }
 
+    /**
+     * @function render
+     * @returns View of the log in form
+     */
     render() {
         return (
             <React.Fragment>
@@ -225,6 +269,10 @@ export default class LoginForm extends Component {
     }
 }
 
+/**
+ * @type {StyleSheet}
+ * Declaration of all the styles needed to style the log in form
+ */
 const styles = StyleSheet.create({
     logo: {
         alignSelf: 'center',

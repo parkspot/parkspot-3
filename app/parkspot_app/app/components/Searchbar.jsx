@@ -1,8 +1,11 @@
-//React dependencies
+//React imports
 import React, { Component } from 'react';
 import { Text, View, StyleSheet, TextInput } from 'react-native';
-//Styles
 
+/**
+ * @class Searchbar
+ * Styling of the searchbar
+ */
 class Searchbar extends Component {
   constructor(props) {
     super(props);
@@ -16,6 +19,10 @@ class Searchbar extends Component {
     this.props.submitHandler(this.state.text)
   }
 
+  /**
+   * @function render
+   * @returns View of the searchbar
+   */
   render() {
 
     const { placeholder } = this.props;
@@ -31,7 +38,10 @@ class Searchbar extends Component {
 }
 
 
-
+/**
+ * @type {StyleSheet}
+ * Declaration of all the styles needed to style the searchbar
+ */
 const styles = StyleSheet.create({
   inputField: {
     paddingLeft: 20,

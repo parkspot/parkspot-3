@@ -1,3 +1,10 @@
+/**
+ * @function validate
+ * @param {String} input 
+ * @param {String} type
+ * Validates the input by a certain type
+ * @returns {boolean}
+ */
 export default function validate(input, type) {
     switch(type) {
         case "email":

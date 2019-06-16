@@ -1,10 +1,19 @@
+//React imports
 import React, { Component } from 'react'
 import { Keyboard, View, TouchableWithoutFeedback, KeyboardAvoidingView, StyleSheet, ImageBackground } from 'react-native'
-import { LinearGradient } from 'expo'
 
+//Local imports
 import RegisterForm from '../components/RegisterForm'
 
+/**
+ * @class RegisterScreen
+ * Shows The Screen for registering
+ */
 class RegisterScreen extends Component {
+    /**
+     * @constructor
+     * @param {Object} props
+     */
     constructor(props) {
         super(props)
         this.state = {
@@ -12,6 +21,11 @@ class RegisterScreen extends Component {
             password: "",
         }
     }
+
+    /**
+     * @function render
+     * @returns View of the Screen
+     */
     render() {
         return (
             <KeyboardAvoidingView style={styles.containerView} behavior="padding">
@@ -29,6 +43,10 @@ class RegisterScreen extends Component {
     }
 }
 
+/**
+ * @type {StyleSheet}
+ * Declaration of all the styles needed to style the RegisterScreen
+ */
 const styles= StyleSheet.create({
     containerView: {
         flex: 1,

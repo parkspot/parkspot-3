@@ -1,10 +1,19 @@
+//React imports
 import React, { Component } from 'react'
 import { View, StyleSheet, TextInput } from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
 
-
+/**
+ * @class TextInputWithIcon
+ * Custom TextInput with styling and functionality
+ */
 export default class TextInputWithIcon extends Component {
+    /**
+     * @function render
+     * @returns View of the Custom Text Input
+     */
     render() {
+        //Check the prop error to see what styling needs to be applied to the Text Input
         let borderstyle;
         if(this.props.error){
             borderstyle = styles.containerBad
@@ -31,6 +40,11 @@ export default class TextInputWithIcon extends Component {
         )
     }
 }
+
+/**
+ * @type {StyleSheet}
+ * Declaration of all the styles needed to style the Text Input
+ */
 styles = StyleSheet.create({
     container: {
         alignSelf: 'center',
