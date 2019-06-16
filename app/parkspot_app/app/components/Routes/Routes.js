@@ -70,6 +70,8 @@ export default class Routes extends Component {
 				<Router>
 					<Scene key="root" hideNavBar>
 						<Scene key="home" component={HomeScreen} title="Home" initial={true} />
+						<Scene key="login" component={LogInScreen} title="Login" />
+						<Scene key="register" component={RegisterScreen} title="Register"/>
 					</Scene>
 				 </Router>
 				)

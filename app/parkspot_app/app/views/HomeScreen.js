@@ -6,7 +6,7 @@ import Card from '../components/Card'
 import Map from '../components/Map'
 import Favorites from '../components/Favorites'
 import Preferences from '../components/Preferences'
-
+import {LogOutButton} from '../components/Buttons'
 
 
 class HomeScreen extends Component {
@@ -46,7 +46,6 @@ class HomeScreen extends Component {
             return true
           } else {
               return false
-              console.log('no value')
           }
         } catch (error) {
           // Error retrieving data
@@ -58,6 +57,7 @@ class HomeScreen extends Component {
         return (
             <View style={styles.container}>
                 <Map />
+                <LogOutButton />
                 <KeyboardAvoidingView style={styles.cardContainer} behavior="padding" enabled keyboardVerticalOffset={70}>
                     <ScrollView horizontal={true} style={{display: this.state.cardDisplay}}>
                         <Card
@@ -90,7 +90,6 @@ class HomeScreen extends Component {
                 <KeyboardAvoidingView style={styles.buttonContainer} behavior="padding" enabled keyboardVerticalOffset={10}>
                     <Searchbar placeholder="Destination..." submitHandler={this.showPreferences}/>
                 </KeyboardAvoidingView>
-
                 <View style={styles.favorites} >
                     <Favorites height={500}/>
                     <Preferences ref="prefElement" height={700} searchHandler={this.showCards} />
