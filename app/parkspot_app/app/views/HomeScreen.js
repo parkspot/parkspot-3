@@ -26,7 +26,7 @@ class HomeScreen extends Component {
                 "long": this.state.destination.lng,
                 "lat": this.state.destination.lat
                 },
-            "userEmail": "lol",
+            "userEmail": this._retrieveDataFromAsyncStorage("email"),
             "settings": {
                 "zonename": zone,
                 "price_per_hour" : price,
@@ -38,7 +38,7 @@ class HomeScreen extends Component {
         }
         
         await fetch(url, {
-          method: 'POST', // or 'PUT'
+          method: 'GET', // or 'PUT'
           body: JSON.stringify(data), // data can be `string` or {object}!
           headers:{
             'Content-Type': 'application/json'
@@ -61,7 +61,7 @@ class HomeScreen extends Component {
     }
 
     showCards = (zone, price, distance, bancontact, lez, underground) => {
-        //this.getResultsFromAPI(zone, price, distance, bancontact, lez, underground)
+        this.getResultsFromAPI(zone, price, distance, bancontact, lez, underground)
         this.setState({cardDisplay: "flex"})
     }
 
