@@ -12,10 +12,9 @@ const { width } = Dimensions.get('window');
 class HomeScreen extends Component {
     constructor(props) {
         super(props);
+        this.mapElement = React.createRef();
         this.state = {
             cardDisplay: "none",
-            prefDisplay: "none",
-            favsDisplay: "flex",
         }
     }
 
@@ -27,6 +26,11 @@ class HomeScreen extends Component {
         this.refs.prefElement.showPrefPanel()
     }
 
+    showMarkers = (destinationAddress, parkingAddress) => {
+        console.log(this.child)
+        this.mapRef.current.updateMarkers(destinationAddress, parkingAddress)
+    }
+
     componentDidMount() {
 		setTimeout(() => {this.scrollView.scrollTo({x: -10}) }, 1) // scroll view position fix
 	}
@@ -34,7 +38,7 @@ class HomeScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Map />
+                <Map  ref={this.mapElement}/>
                 <KeyboardAvoidingView style={styles.cardContainer} behavior="padding" enabled keyboardVerticalOffset={70}>
                     <ScrollView ref={(scrollView) => { this.scrollView = scrollView; }} horizontal={true} decelerationRate={0} snapToInterval={width - 20} snapToAlignment={"center"} showsHorizontalScrollIndicator={false}
                     contentInset={{
@@ -44,6 +48,8 @@ class HomeScreen extends Component {
                         right: 10,
                     }} style={{display: this.state.cardDisplay}}>
                         <Card
+                            onClick={this.showMarkers}
+                            destination={"sassevaartstraat 46, Gent"}
                             parkingName={"Parking Savaanstraat (P4)"}
                             address={"Savaanstraat 13, 9000 Gent"}
                             price={"€2,50/started hour"}
@@ -52,6 +58,8 @@ class HomeScreen extends Component {
                             chance={"86% chance"}
                             />
                         <Card 
+                            onClick={this.showMarkers}
+                            destination={"sassevaartstraat 46, Gent"}
                             parkingName={"Interparking Gent Zuid"}
                             address={"Franklin Rooseveltlaan 3/A, 9000 Gent"}
                             price={"€3,00/started hour"}
@@ -60,6 +68,8 @@ class HomeScreen extends Component {
                             chance={"34% chance"}
                             />
                         <Card 
+                            onClick={this.showMarkers}
+                            destination={"sassevaartstraat 46, Gent"}
                             parkingName={"Parking Vrijdagmarkt (P1)"}
                             address={"Vrijdagmarkt 1, 9000 Gent"}
                             price={"€2,00/started hour"}
@@ -68,6 +78,8 @@ class HomeScreen extends Component {
                             chance={"97% chance"}
                             />
                             <Card 
+                            onClick={this.showMarkers}
+                            destination={"sassevaartstraat 46, Gent"}
                             parkingName={"Parking Vrijdagmarkt (P1)"}
                             address={"Vrijdagmarkt 1, 9000 Gent"}
                             price={"€2,00/started hour"}
@@ -76,6 +88,8 @@ class HomeScreen extends Component {
                             chance={"97% chance"}
                             />
                             <Card 
+                            onClick={this.showMarkers}
+                            destination={"sassevaartstraat 46, Gent"}
                             parkingName={"Parking Vrijdagmarkt (P1)"}
                             address={"Vrijdagmarkt 1, 9000 Gent"}
                             price={"€2,00/started hour"}
@@ -84,6 +98,8 @@ class HomeScreen extends Component {
                             chance={"97% chance"}
                             />
                             <Card 
+                            onClick={this.showMarkers}
+                            destination={"sassevaartstraat 46, Gent"}
                             parkingName={"Parking Vrijdagmarkt (P1)"}
                             address={"Vrijdagmarkt 1, 9000 Gent"}
                             price={"€2,00/started hour"}

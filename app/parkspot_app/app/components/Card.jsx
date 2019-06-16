@@ -23,6 +23,10 @@ class Card extends Component {
     super(props);
   }
 
+  onComponentDidMount() {
+    console.log(this.props.destination)
+  }
+
   openWaze = () => {
     try {
       let address = this.props.address
@@ -37,7 +41,7 @@ class Card extends Component {
   render() {
 
   return (
-  <TouchableOpacity style={styles.cardStyle} >
+  <TouchableOpacity style={styles.cardStyle} onPress={this.props.onClick(this.props.destination, this.props.address)}>
     <View style={styles.card} >
       <View style={styles.view}>
       <View style={{flexDirection: "row", width: "100%", justifyContent: "space-between"}}>
