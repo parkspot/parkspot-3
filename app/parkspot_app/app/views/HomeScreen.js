@@ -6,6 +6,7 @@ import Card from '../components/Card'
 import Map from '../components/Map'
 import Favorites from '../components/Favorites'
 import Preferences from '../components/Preferences'
+import WeatherIcon from '../components/WeatherIcon'
 import {LogOutButton} from '../components/Buttons'
 
 
@@ -123,6 +124,7 @@ class HomeScreen extends Component {
             <View style={styles.container}>
                 <LogOutButton />
                 <Map  ref={this.mapElement}/>
+                <WeatherIcon/>
                 <KeyboardAvoidingView style={styles.cardContainer} behavior="padding" enabled keyboardVerticalOffset={70}>
                     <ScrollView ref={(scrollView) => { this.scrollView = scrollView; }} horizontal={true} decelerationRate={0} snapToInterval={width - 20} snapToAlignment={"center"} showsHorizontalScrollIndicator={false}
                     contentInset={{
