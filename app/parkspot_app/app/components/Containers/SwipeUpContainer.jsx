@@ -1,23 +1,45 @@
+//React imports
 import React, { Component } from 'react'
 import { View, StyleSheet, Button } from 'react-native'
 
+//Local imports
 import SlidingUpPanel from 'rn-sliding-up-panel';
 import { Title } from '../Texts/'
+
+/**
+ * @class SwipeUpContainer
+ * Styling and functionality for a swipe up panel
+ */
 class SwipeUpContainer extends Component {
 
+    /**
+     * @constructor
+     * @param {Object} props 
+     */
     constructor(props) {
         super(props)
     }
 
-
+    /**
+     * @function ClosePanel
+     * Asynchronous function to hide the swipe up panel
+     */
     ClosePanel = async () => {
         this._panel.hide()
     }
 
+    /**
+     * @function ShowPanel
+     * Asynchronous function to show the swipe up panel
+     */
     ShowPanel = async () => {
         this._panel.show()
     }
 
+    /**
+     * @function render
+     * @returns View of the swipe up panel
+     */
     render() {
 
         return (
@@ -38,7 +60,10 @@ class SwipeUpContainer extends Component {
     }
 }
 
-
+/**
+ * @type {StyleSheet}
+ * Declaration of all the styles needed to style the swipe up panel
+ */
 const styles = StyleSheet.create({
     swipeContainer: {
         width: "100%",

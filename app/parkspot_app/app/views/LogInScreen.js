@@ -1,9 +1,20 @@
+//React imports
 import React, { Component } from 'react'
 import { Keyboard, View, TouchableWithoutFeedback, KeyboardAvoidingView, StyleSheet, ImageBackground } from 'react-native'
 
+//Local imports
 import LoginForm from '../components/LoginForm'
 
+/**
+ * @class LogInScreen
+ * Shows The Screen for the Log In
+ */
 class LogInScreen extends Component {
+
+    /**
+     * @constructor
+     * @param {Object} props 
+     */
     constructor(props) {
         super(props)
         this.state = {
@@ -11,6 +22,11 @@ class LogInScreen extends Component {
             password: "",
         }
     }
+
+    /**
+     * @function render
+     * @returns View of the Screen
+     */
     render() {
         return (
             <KeyboardAvoidingView style={styles.containerView} behavior="padding">
@@ -28,6 +44,11 @@ class LogInScreen extends Component {
     }
 }
 
+
+/**
+ * @type {StyleSheet}
+ * Declaration of all the styles needed to style the LogInScreen
+ */
 const styles= StyleSheet.create({
     containerView: {
         flex: 1,

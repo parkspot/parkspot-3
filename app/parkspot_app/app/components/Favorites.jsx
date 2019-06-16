@@ -1,20 +1,40 @@
+//React imports
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, ScrollView } from 'react-native'
 import { SwipeUpContainer } from './Containers'
 import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures'
+
+//Local imports
 import FavoritesListItem from '../components/FavoritesListItem'
 
+/**
+ * @Class Favorites
+ * Styling and functionality for favortites list
+ */
 class Favorites extends Component {
+    /**
+     * @constructor
+     * @param {Object} props 
+     */
     constructor(props) {
         super(props);
         this.favsElement = React.createRef();
     }
 
+    /**
+     * @function SwipedUp
+     * Show the favorite list
+     */
     SwipedUp = () => {
         this.favsElement.current.ShowPanel()
     }
 
+    /**
+     * @function render
+     * @returns View of the favorite list
+     */
     render() {
+        //Config object to regulate the swipe up gesture
         const config = {
             velocityThreshold: 0.3,
             directionalOffsetThreshold: 80
@@ -36,6 +56,11 @@ class Favorites extends Component {
         );
     }
 }
+
+/**
+ * @type {StyleSheet}
+ * Declaration of all the styles needed to style the Favorites List
+ */
 const styles = StyleSheet.create({
     swipeContainer: {
         position: "absolute",

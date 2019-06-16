@@ -1,6 +1,11 @@
+//React imports
 import React, { Component } from 'react'
 import { Text, StyleSheet } from 'react-native'
 
+/**
+ * @type {StyleSheet}
+ * Declaration of all the styles needed to style the RegisterScreen
+ */
 const styles = StyleSheet.create({
     title: {
         fontSize: 20,
@@ -12,6 +17,11 @@ const styles = StyleSheet.create({
     }
 })
 
+/**
+ * @Class Title
+ * @param {String} text 
+ * Styling of a title
+ */
 const Title = ({ text }) => (
     <Text style={styles.title}>{text}</Text>
 )

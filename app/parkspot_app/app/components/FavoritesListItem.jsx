@@ -1,13 +1,25 @@
+//React imports
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, TouchableOpacity } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 
+/**
+ * @class FavoritesListItem
+ * Styling of 1 favorites list item
+ */
 class FavoritesListItem extends Component {
+    /**
+     * @constructor
+     * @param {Object} props 
+     */
     constructor(props) {
         super(props);
     }
 
-
+    /**
+     * @function render
+     * @returns View of 1 list item
+     */
     render() {
         return (
             <TouchableOpacity style={styles.listItemContainer}>
@@ -20,6 +32,11 @@ class FavoritesListItem extends Component {
         )
     }
 }
+
+/**
+ * @type {StyleSheet}
+ * Declaration of all the styles needed to style the Favorites List item
+ */
 const styles = StyleSheet.create({
     listItemContainer: {
         width:"100%",

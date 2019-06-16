@@ -1,15 +1,25 @@
+//React imports
 import React, { Component } from 'react'
 import { Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { LinearGradient } from 'expo'
 
+/**
+ * @class RectangleButton
+ * Styling for a custom rectangle button with a linear gradient
+ */
 class RectangleButton extends Component {
-
+    /**
+     * @constructor
+     * @param {Object} props
+     */
     constructor(props) {
         super(props)
     }
 
-    
-
+    /**
+     * @function render
+     * @returns View of the Button
+     */
     render() {
         return (
             <TouchableOpacity style={styles.rectangleButtonContainer} onPress={this.props.onPress}>
@@ -21,7 +31,10 @@ class RectangleButton extends Component {
     }
 }
 
-
+/**
+ * @type {StyleSheet}
+ * Declaration of all the styles needed to style the RectangleButton
+ */
 const styles = StyleSheet.create({
     rectangleButtonContainer: {
         width: "100%",

@@ -1,7 +1,7 @@
+//React imports
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, TouchableOpacity, Image, Alert, Linking } from 'react-native'
 import { Notifications } from 'expo'
-
 import AppLink from 'react-native-app-link';
 
 /**
@@ -14,13 +14,24 @@ const cancelNotification = async () => {
     console.log(error)
   }
 }
-
+/**
+ * @class Card
+ * Styling and functionality for a card
+ */
 class Card extends Component {
 
+  /**
+   * @constructor
+   * @param {Object} props 
+   */
   constructor(props) {
     super(props);
   }
 
+  /**
+   * @function openWaze
+   * Open's waze directly from our app with the correct destination
+   */
   openWaze = () => {
     try {
       let address = this.props.address
@@ -32,6 +43,10 @@ class Card extends Component {
     }
   }
 
+  /**
+   * @function render
+   * @returns View of the Card
+   */
   render() {
 
   return (
@@ -85,6 +100,10 @@ class Card extends Component {
   );}
 }
 
+/**
+ * @type {StyleSheet}
+ * Declaration of all the styles needed to style the Card
+ */
 const styles = StyleSheet.create({
   card: {
     width: '100%',
