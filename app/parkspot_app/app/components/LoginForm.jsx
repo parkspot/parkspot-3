@@ -4,6 +4,7 @@ import { View, Text, Image, StyleSheet,TouchableOpacity, AsyncStorage} from 'rea
 import { Button } from 'react-native-elements'
 import { Actions } from 'react-native-router-flux'
 import Dialog, { DialogContent, DialogFooter,DialogButton, DialogTitle } from 'react-native-popup-dialog'
+import { HOSTNAME, PORT } from 'react-native-dotenv'
 
 //Local imports
 import TextInputWithIcon from '../components/TextInputWithIcon'
@@ -40,7 +41,7 @@ export default class LoginForm extends Component {
     async checkEmailInDatabase() {
         let {email} = this.state
         this.setState({EmailInUse: false})
-        const url = "http://192.168.1.5:8080/api/v1/users"
+        const url = `http://${HOSTNAME}:${PORT}/api/v1/users`
         await fetch(url)
         .then(response => 
             response.json()
@@ -62,7 +63,7 @@ export default class LoginForm extends Component {
      * If the post request was succesfull store the value in the AsyncStorage with the response token from the API
      */
     async postUserToAuthentication(){
-        const url = "http://192.168.1.5:8080/api/v1/login/local"
+        const url = `http://${HOSTNAME}:${PORT}/api/v1/login/local`
         var data = {
             email: this.state.email,
             password: this.state.password
