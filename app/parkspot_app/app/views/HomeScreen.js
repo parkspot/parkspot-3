@@ -138,7 +138,7 @@ class HomeScreen extends Component {
                             onClick={this.showMarkers}
                             destination={this.state.destinationAddress}
                             parkingName={parking.name}
-                            address={parking.address.split(",", 1)}
+                            address={`${parking.address.match(/(^.*?[^;][0-9])/g)},${(parking.address.split(",")[1])}`}
                             price={parking.price.day}
                             type={parking.type}
                             openWhen={parking.open}

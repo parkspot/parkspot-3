@@ -49,7 +49,9 @@ class Preferences extends Component {
 
     searchHandler = () => {
         this.props.searchHandler(this.state.zone, this.state.price, this.state.distance, this.state.bancontact, this.state.avoidLez, this.state.avoidUnderground)
-        this.prefElement.current.ClosePanel()
+        setTimeout(() => {
+            this.prefElement.current.ClosePanel()
+        }, 1000);
     }
 
     showPrefPanel = () => {

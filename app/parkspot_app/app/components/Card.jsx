@@ -88,7 +88,7 @@ class Card extends Component {
       <View style={styles.listItemContainer_normal}>
           <View style={styles.listItemRowContainer}>
               <Text style={styles.itemName} >Price</Text>
-              <Text style={styles.itemValue}>{this.props.price}</Text>
+              <Text style={styles.itemValue}>€{this.props.price}/hour</Text>
           </View>
       </View>
 
@@ -109,7 +109,7 @@ class Card extends Component {
       <View style={styles.listItemContainer_normal}>
           <View style={styles.listItemRowContainer}>
               <Text style={styles.itemName} >Free spot</Text>
-              <Text style={styles.itemValue}>{this.props.chance}</Text>
+              <Text style={styles.itemValue}>{this.props.chance}% chance</Text>
           </View>
       </View>
 
@@ -179,8 +179,8 @@ const styles = StyleSheet.create({
 listItemRowContainer: {
   flex: 1,
   flexDirection: "row",
-  justifyContent: "space-between",
   alignItems: "center",
+  justifyContent: "space-between",
   paddingLeft: 20,
   paddingRight: 20,
 },
@@ -195,6 +195,7 @@ lastItemContainer: {
 },
 subtitle: {
   fontSize: 16,
+  width: "80%",
   fontWeight: '500',
   color: '#484848',
   marginLeft: 20,
