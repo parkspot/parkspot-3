@@ -14,6 +14,13 @@ body {
     scroll-snap-type: y proximity;
 }
 
+.slogan {
+    color: #35d171;
+    text-align: right;
+    font-size: 80px;
+    font-family: 'Anton', sans-serif;
+}
+
 .setting {
 
     scroll-snap-align: initial;
