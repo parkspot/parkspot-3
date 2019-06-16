@@ -134,15 +134,15 @@ class HomeScreen extends Component {
 
                         {Array.from(this.state.parkings).map(parking => (
                             <Card
-                            key={parking.id}
+                            key={parking.address}
                             onClick={this.showMarkers}
                             destination={this.state.destinationAddress}
-                            parkingName={parking.id}
-                            address={parking.address}
-                            price={parking.properties.tarief.day}
+                            parkingName={parking.name}
+                            address={parking.address.split(",", 1)}
+                            price={parking.price.day}
                             type={parking.type}
-                            openWhen={"24/7"}
-                            chance={parking.kans}
+                            openWhen={parking.open}
+                            chance={parking.chance}
                             />
                         ))}
 
