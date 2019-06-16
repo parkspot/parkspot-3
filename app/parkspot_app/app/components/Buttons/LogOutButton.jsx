@@ -1,6 +1,6 @@
 //React imports
 import React, { Component } from 'react'
-import { Text, View, TouchableOpacity, StyleSheet } from 'react-native'
+import { TouchableOpacity, StyleSheet, AsyncStorage } from 'react-native'
 import { Ionicons } from '@expo/vector-icons'
 import {Actions} from 'react-native-router-flux'
 
@@ -15,28 +15,24 @@ export default class LogOutButton extends Component {
      */
     constructor(props){
         super(props)
+
     }
 
     async _removeItemValue(key) {
-        try {
-          await AsyncStorage.removeItem(key);
-          return true;
-        }
-        catch(exception) {
-          return false;
-        }
-    }
-
-    async _onPress() {
-        await this._removeItemValue('userToken')
-        await this._removeItemValue('email')
-        this._removeItemValue('userId')
-        Actions.login()
+        await AsyncStorage.removeItem(key).catch(error => {
+            console.error(error)
+        })
+        return true;
     }
 
     render() {
         return (
-            <TouchableOpacity style={styles.button} onPress={this._onPress}>
+            <TouchableOpacity style={styles.button} onPress={async () => {
+                await this._removeItemValue('userToken')
+                await this._removeItemValue('email')
+                await this._removeItemValue('userId')
+                Actions.login()
+            }}>
                 <Ionicons name="ios-log-out" size={32} color="#707070" style={styles.favIcon} />
             </TouchableOpacity>
         )

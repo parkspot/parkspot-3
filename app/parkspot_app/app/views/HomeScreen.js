@@ -108,7 +108,6 @@ class HomeScreen extends Component {
 	}
 
     render() {
-        this._removeItemValue("userToken") 
         return (
             <View style={styles.container}>
                 <LogOutButton />

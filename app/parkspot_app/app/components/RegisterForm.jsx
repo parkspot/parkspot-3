@@ -109,7 +109,7 @@ export default class RegisterForm extends Component {
             console.log('Token:', response.token)
             this._postDataToAsyncStorage('userToken', response.token)
             this._postDataToAsyncStorage('email', response.email)
-            this._postDataToAsyncStorage('email', response.userId)
+            this._postDataToAsyncStorage('userId', response.userId)
         })
         .catch(error => console.error('Error:', error))
     }
