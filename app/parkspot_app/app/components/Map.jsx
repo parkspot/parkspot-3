@@ -3,16 +3,11 @@ import { StyleSheet, View, } from 'react-native';
 import MapView, { Marker } from 'react-native-maps';
 import MapViewDirections from 'react-native-maps-directions';
 
-import Config from 'react-native-config'
-
-const origin = {latitude: 37.3318456, longitude: -122.0296002};
-const destination = {latitude: 37.771707, longitude: -122.4053769};
 const GOOGLE_MAPS_APIKEY = ''; // credit card nodig om route op kaart te tonen...
 
 class Map extends React.Component {
     constructor(props) {
         super(props);
-        this.mapElement = React.createRef();
         this.state = {
             address: "vogelzangstraat 1, Lokeren",
             coordinates : {
@@ -22,10 +17,6 @@ class Map extends React.Component {
             markers: []
         }
     }
-
-    componentDidMount() {
-        this.props.onRef(this)
-      }
 
     getCoordinates(address){
         fetch("https://api.opencagedata.com/geocode/v1/json?q=" + address + "&key=4fd9b61b904e466b8256aa5b4c04cb7b")

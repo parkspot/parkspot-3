@@ -27,8 +27,7 @@ class HomeScreen extends Component {
     }
 
     showMarkers = (destinationAddress, parkingAddress) => {
-        console.log(this.child)
-        this.mapRef.current.updateMarkers(destinationAddress, parkingAddress)
+        this.mapElement.current.updateMarkers(destinationAddress, parkingAddress)
     }
 
     componentDidMount() {
