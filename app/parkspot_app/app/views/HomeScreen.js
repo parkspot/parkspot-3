@@ -26,7 +26,8 @@ class HomeScreen extends Component {
         this.refs.prefElement.showPrefPanel()
     }
 
-    showMarkers = (destinationAddress, parkingAddress) => {
+    showMarkers = async(destinationAddress, parkingAddress) => {
+        await this.mapElement.current
         this.mapElement.current.updateMarkers(destinationAddress, parkingAddress)
     }
 

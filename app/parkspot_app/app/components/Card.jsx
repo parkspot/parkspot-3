@@ -21,10 +21,18 @@ class Card extends Component {
 
   constructor(props) {
     super(props);
+    this.callParentfunction = this.callParentfunction.bind(this);
+    this.state = {
+      destinationAdress: "",
+      parkingAddress: "",
+    }
   }
 
-  onComponentDidMount() {
-    console.log(this.props.destination)
+  componentDidMount() {
+    this.setState({
+      destinationAdress: this.props.destination,
+      parkingAddress: this.props.address
+    })
   }
 
   openWaze = () => {
@@ -38,10 +46,14 @@ class Card extends Component {
     }
   }
 
+  callParentfunction() {
+    this.props.onClick(this.props.destination, this.props.address)
+  }
+
   render() {
 
   return (
-  <TouchableOpacity style={styles.cardStyle} onPress={this.props.onClick(this.props.destination, this.props.address)}>
+  <TouchableOpacity style={styles.cardStyle} onPress={this.callParentfunction}>
     <View style={styles.card} >
       <View style={styles.view}>
       <View style={{flexDirection: "row", width: "100%", justifyContent: "space-between"}}>
