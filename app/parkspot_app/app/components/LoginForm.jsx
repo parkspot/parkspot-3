@@ -78,8 +78,6 @@ export default class LoginForm extends Component {
         })
         .then(res => res.json())
         .then(async (response) => {
-            console.log('Success:', JSON.stringify(response))
-            console.log('Token:', response.token)
             await this._postDataToAsyncStorage('userToken', response.token)
             await this._postDataToAsyncStorage('email', response.email)
             await this._postDataToAsyncStorage('userId', response.userId)

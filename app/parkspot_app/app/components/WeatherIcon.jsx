@@ -23,7 +23,6 @@ class WeatherIcon extends Component {
        loading: false,
        temp: Math.round(responseJson['main']['temp'])
       })
-      console.log(this.state.temp);
     })
     .catch(error=>console.log(error)) //to catch the errors if any
     }
@@ -50,13 +49,15 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   container: {
+    position: "absolute",
     width: 40,
     height: 70,
+    top: 100,
+    right: 15,
     alignItems: 'center',
     borderRadius: 20,
     backgroundColor: 'white',
     alignSelf: 'flex-end',
-    marginRight: 10,
     marginBottom: 700,
     shadowColor: "#000",
     shadowOffset: {
