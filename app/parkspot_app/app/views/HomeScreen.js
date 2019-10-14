@@ -25,7 +25,7 @@ class HomeScreen extends Component {
         }
     }
     getResultsFromAPI = async(zone, price, distance, bancontact, lez, underground) => {
-        const url = "http://192.168.5.136:8080/api/v1/searchparkingspots"
+        const url = "http://10.1.226.255:8080/api/v1/searchparkingspots"
 
         var data = {
             "destinationGeo": {
